@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+        "target": "es6",                          
+        "module": "commonjs",                     
+        "lib": [
+            "dom",
+            "es6",
+            "scripthost",
+            "es2015.promise"
+        ],                                        
+        "jsx": "react",                           
+        "declaration": false,                     
+        "sourceMap": true,                        
+        "outDir": "./dist/",                    
+        "strict": false,                           
+        "moduleResolution": "node",   
+        "allowSyntheticDefaultImports" : true,
+        //"esModuleInterop": true,          
+        "typeRoots": [
+            "./node_modules/@types"
+        ],                                        
+        "types": [
+            "node",
+            "react",
+            "react-dom"
+        ]   
+    },
+    "exclude": [
+        "node_modules",
+        "dist",
+        "webpack"
+    ]                                 
+  }
+  

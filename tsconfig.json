@@ -1,25 +1,29 @@
 {
-    "compilerOptions": {
-      "baseUrl": "app",
-      "outDir": "build/dist",
-      "module": "esnext",
-      "target": "es5",
-      "lib": ["es6", "dom"],
-      "sourceMap": true,
-      "allowJs": true,
-      "jsx": "react",
-      "moduleResolution": "node",
-      "rootDir": "./",
-      "forceConsistentCasingInFileNames": true,
-      "allowSyntheticDefaultImports": true
-    },
-    "exclude": [
-      "node_modules",
-      "build",
-      "scripts",
-      "acceptance-tests",
-      "webpack",
-      "jest",
-      "internals"
-    ]
-  }
+  "compilerOptions": {
+      "target": "es6",                          
+      "module": "esnext",                     
+      "lib": [
+          "dom",
+          "es6",
+          "scripthost",
+          "es2015.promise"
+      ],                                        
+      "jsx": "react",                           
+      "declaration": false,                     
+      "sourceMap": true,                        
+      "outDir": "./dist/",                    
+      "strict": false,                           
+      "moduleResolution": "node",   
+      "allowSyntheticDefaultImports" : true,
+      "esModuleInterop": true,          
+      "typeRoots": [
+          "./node_modules/@types"
+      ],                                        
+      "types": [
+          "node",
+          "react",
+          "react-dom"
+      ]   
+  },
+  "exclude": ["node_modules"]                                 
+}
