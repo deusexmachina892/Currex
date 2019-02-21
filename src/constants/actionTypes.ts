@@ -1,4 +1,7 @@
-// It's preferable to keep your action types together.
-export const GET_CURRENCY_DATA_REQUEST = '@@currency/GET_CURRENCY_DATA_REQUEST';
-export const GET_CURRENCY_DATA_SUCCESS = '@@currency/GET_CURRENCY_DATA_SUCCESS';
-export const GET_CURRENCY_DATA_ERROR = '@currency/GET_CURRENCY_DATA_ERROR';
+
+export const LOAD_CONFIG_REQUEST = '@@config/LOAD_CONFIG_REQUEST';
+export const LOAD_CONFIG_SUCCESS = '@@config/LOAD_CONFIG_SUCCESS';
+export const LOAD_CONFIG_ERROR = '@@config/LOAD_CONFIG_ERROR';
+export const GET_EXCHANGE_RATE_REQUEST = '@@exchange/GET_EXCHANGE_RATE_REQUEST';
+export const GET_EXCHANGE_RATE_SUCCESS = '@@exchange/GET_EXCHANGE_RATE_SUCCESS';
+export const GET_EXCHANGE_RATE_ERROR = '@@exchange/GET_EXCHANGE_RATE_ERROR';

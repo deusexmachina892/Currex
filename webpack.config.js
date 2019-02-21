@@ -32,7 +32,7 @@ module.exports =  {
     mode: process.env.NODE_ENV,
     devtool: 'source-map',
     entry: [
-        //'webpack-hot-middleware/client?reload=true',
+        'webpack-hot-middleware/client?reload=true',
             APP_DIR
         ],
     output: {
@@ -48,16 +48,22 @@ module.exports =  {
         rules: [
             { 
                 test: /\.tsx?$/, 
-                loader: "ts-loader" 
-            },
-            {
-                test: /(\.jsx?)/,
-                exclude: /node_modules/,
-                loader: 'babel-loader'
+                loader: "ts-loader",
+                options: {
+                    configFile: "tsconfig.webpack.json"
+                }
             },
             {
                 test: /\.css/,
                 use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.(png|woff|woff2|eot|ttf|svg|jpe?g)$/,
+                loader: 'file-loader',
+                query:{
+                    outputPath: './img/',
+                    name: '[name].[ext]?[hash]'
+                }
             }
         ]
     },

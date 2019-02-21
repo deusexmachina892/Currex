@@ -1,12 +1,14 @@
 import * as express from 'express';
 import * as path from 'path';
 
-const app = express();
+const app: express.Application = express();
 
 if(process.env.NODE_ENV === 'development'){
-const webpack = require('webpack');
-const config = require('../webpack.config.js');
-const compiler = webpack(config);
+    const webpack = require('webpack');
+    const config = require('../webpack.config.js');
+    const compiler = webpack(config);
+
+    app.use('/config', express.static(path.join(process.cwd(), 'public', 'config.json')));
     /**
      * Use webpack-dev-middleware, which facilitates creating a bundle.js in memory and updating it automatically
      * based on changed files
@@ -28,7 +30,7 @@ const compiler = webpack(config);
     }));
 
     /**
-     * Hot middleware allows the page to reload automatically while we are working on it.
+     * Hot middleware allows the page to reload automatically while we are working on it
      * Can be used instead of react-hot-middleware if Redux is being used to manage app state
      */
     app.use(require('webpack-hot-middleware')(compiler));

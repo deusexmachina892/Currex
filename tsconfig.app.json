@@ -15,7 +15,7 @@
         "strict": false,                           
         "moduleResolution": "node",   
         "allowSyntheticDefaultImports" : true,
-        //"esModuleInterop": true,          
+        // "esModuleInterop": true,          
         "typeRoots": [
             "./node_modules/@types"
         ],                                        
@@ -25,10 +25,8 @@
             "react-dom"
         ]   
     },
-    "exclude": [
-        "node_modules",
-        "dist",
-        "webpack"
-    ]                                 
+    "include": [
+        "server.ts"
+    ]                               
   }
   

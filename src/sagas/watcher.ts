@@ -1,8 +1,13 @@
 import { takeLatest } from 'redux-saga/effects';
-import { getCurrencyRateSaga } from './currencySaga';
-import { GET_CURRENCY_DATA_REQUEST } from '../constants/actionTypes';
+import { loadConfigSaga } from './configSaga';
+import { getExchangeRateSaga } from './exchangeSaga';
+import { LOAD_CONFIG_REQUEST, GET_EXCHANGE_RATE_REQUEST } from '../constants/actionTypes';
 
-// Watches for SEARCH_MEDIA_REQUEST action type asynchronously
-export default function* watchGetCurrencyData() {
-  yield takeLatest(GET_CURRENCY_DATA_REQUEST, getCurrencyRateSaga);
+
+export function* watchLoadConfig() {
+  yield takeLatest(LOAD_CONFIG_REQUEST, loadConfigSaga);
+}
+
+export function* watchGetExchangeRate() {
+  yield takeLatest(GET_EXCHANGE_RATE_REQUEST, getExchangeRateSaga);
 }

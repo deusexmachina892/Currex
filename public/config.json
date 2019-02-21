@@ -1,0 +1,16 @@
+{
+    "currencies": {
+        "USD": { "stock": 1000, "symbol": "$"},
+        "EUR": { "stock": 1000, "symbol": "€"} , 
+        "CAD": { "stock": 1000, "symbol": "C$"}, 
+        "GBP": { "stock": 1000, "symbol": "£"},
+        "CHF": { "stock": 1000, "symbol": "CHf"},
+        "SGD": { "stock": 1000, "symbol": "S$"}
+    },
+    "base": "USD",
+    "margin": 2,
+    "commissionPct": 2,
+    "surcharge":1,
+    "minCommission": 5
+
+}
