@@ -2,7 +2,7 @@ import { all, put, call } from 'redux-saga/effects';
 import pick from 'lodash.pick';
 import mapValues from 'lodash.mapvalues';
 import method from 'lodash.method';
-import { loadConfig, updateConfig } from '../Api/api';
+import { loadConfig } from '../Api/api';
 import { LOAD_CONFIG_SUCCESS, LOAD_CONFIG_ERROR, UPDATE_CONFIG_SUCCESS, UPDATE_CONFIG_ERROR } from '../constants/actionTypes';
 
 

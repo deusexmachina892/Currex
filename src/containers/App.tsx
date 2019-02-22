@@ -11,28 +11,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/styles.css';
 
 // actions
-import { loadConfig, updateConfig, getExchangeRates } from '../actions';
+import { loadConfig, loadCurrencies, updateConfig, getExchangeRates, updateCurrencyStock } from '../actions';
 
 import Loader from '../commons/Loader';
 
 import Header from '../commons/Header';
 import Home from '../components/Home';
+import { any } from 'prop-types';
 
 
-// Separate state props + dispatch props to their own interfaces.
-// interface PropsFromState {
-//     loading: boolean
-//     data: Hero[]
-//     errors: string
-//   }
-  
-  // We can use `typeof` here to map our dispatch types to the props, like so.
-  interface PropsFromDispatch {
-    fetchRequest: typeof getExchangeRates
-  }
-  
-  // Combine both state + dispatch props - as well as any props we want to pass - in a union type.
-  type AllProps = PropsFromDispatch;
 
 const HomeLazy =  Loadable({
     loader: () => import('../components/Home'),
@@ -47,18 +34,19 @@ class App extends React.Component<any, any>{
         super(props);
     }
     componentDidMount(){
-        const { loadConfig } = this.props;
+        const { loadConfig, loadCurrencies } = this.props;
+        loadCurrencies();
         loadConfig();
     }
     componentDidUpdate(prevProps, prevState){
         if (!this.props.config.loading && !isEqual(prevProps.config, this.props.config)){
-           const { config, getExchangeRates  } = this.props;
-           const { base, currencies } = config;
-           getExchangeRates( { base, currencies } );
+           const { config, currencies, getExchangeRates  } = this.props;
+           const { base } = config;
+           getExchangeRates( { base, currencies: currencies.data } );
         }
     }
     render(){
-        const { config, exchangeRate, updateConfig } = this.props;
+        const { config, currencies, exchangeRate, updateConfig, updateCurrencyStock } = this.props;
         return(
             <div className='currEx'>
                 <BrowserRouter>
@@ -66,18 +54,20 @@ class App extends React.Component<any, any>{
                         <Header />
                         <Switch>
                             <Route path='/' exact render={
-                                (props)=> <HomeLazy 
+                                (props)=> (<HomeLazy 
                                                 config={config} 
-                                                exchangeRate={exchangeRate} 
+                                                currencies={currencies}
+                                                exchangeRate={exchangeRate}
+                                                updateCurrencyStock={updateCurrencyStock}
                                                 {...props}
-                                            />
+                                            />)
                             }/>
                             <Route path='/admin' exact render={
-                                (props) => <AdminLazy 
+                                (props) => (<AdminLazy 
                                                 config={config} 
                                                 updateConfig={updateConfig} 
                                                 {...props}
-                                            />
+                                            />)
                             }/>
                         </Switch>
                     </div>
@@ -88,14 +78,17 @@ class App extends React.Component<any, any>{
 }
 
 
-const mapStateToProps = ({ config, exchangeRate }) => ({
+const mapStateToProps = ({ config, currencies, exchangeRate }) => ({
    config,
+   currencies,
    exchangeRate
 })
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     loadConfig: () => dispatch(loadConfig()),
+    loadCurrencies: () => dispatch(loadCurrencies()),
     getExchangeRates: (payload) => dispatch(getExchangeRates(payload)),
-    updateConfig: (payload) => dispatch(updateConfig(payload))
+    updateConfig: (payload) => dispatch(updateConfig(payload)),
+    updateCurrencyStock: (payload) => dispatch(updateCurrencyStock(payload))
   })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

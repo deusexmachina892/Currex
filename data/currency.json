@@ -1,0 +1,10 @@
+{
+    "currencies": {
+        "USD": { "stock": 100000, "symbol": "$"},
+        "EUR": { "stock": 50000, "symbol": "€"} , 
+        "CAD": { "stock": 50000, "symbol": "C$"}, 
+        "GBP": { "stock": 50000, "symbol": "£"},
+        "CHF": { "stock": 50000, "symbol": "CHf"},
+        "SGD": { "stock": 50000, "symbol": "S$"}
+    }
+}

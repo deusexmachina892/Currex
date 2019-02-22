@@ -3,14 +3,16 @@ import * as path from 'path';
 
 const app: express.Application = express();
 
+
+app.use('/config', express.static(path.join(process.cwd(), 'data', 'config.json')));
+app.use('/currencies', express.static(path.join(process.cwd(), 'data', 'currency.json')));
+
 if(process.env.NODE_ENV === 'development'){
     const webpack = require('webpack');
     const config = require('../webpack.config.js');
     const compiler = webpack(config);
     var history = require('connect-history-api-fallback');
     
-
-    app.use('/config', express.static(path.join(process.cwd(), 'public', 'config.json')));
     /**
      * Use webpack-dev-middleware, which facilitates creating a bundle.js in memory and updating it automatically
      * based on changed files

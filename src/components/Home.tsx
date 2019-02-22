@@ -35,8 +35,9 @@ class Home extends React.PureComponent<any, any>{
       }
     renderCurrencyInfo(){
         const { config, exchangeRate } = this.props;
-        const { currencies, base, margin} = config;
+        const { base, margin} = config;
         const { rates } = exchangeRate;
+        const currencies = this.props.currencies.data;
         return Object.keys(currencies).map(currency => {
             if (currency !== base){
                 const buyRate = parseFloat((rates[currency] * (1+ (margin/100))).toString()).toFixed(4);
@@ -53,11 +54,11 @@ class Home extends React.PureComponent<any, any>{
         })   
     }
     render(){
-        const { config, exchangeRate } = this.props;
+        const { config, currencies, exchangeRate, updateCurrencyStock } = this.props;
         return(
             <React.Fragment>
                 <section className='home'>
-                  <header className="info">Exchange Rates Shown as per {moment(exchangeRate.timestamp).format('YYYY/MM/DD hh:mm:ss a')}. You have {parseFloat(config.currencies[config.base].stock).toFixed(2)} {config.base} left.</header>
+                  <header className="info">Exchange Rates Shown as per {moment(exchangeRate.timestamp).format('YYYY/MM/DD hh:mm:ss a')}. You have {parseFloat(currencies.data[config.base].stock).toFixed(2)} {config.base} left.</header>
                   <main>
                     {!isEmpty(config) && !isEmpty(exchangeRate.rates)?
                     (<Table striped>
@@ -77,7 +78,15 @@ class Home extends React.PureComponent<any, any>{
                       }
                   </main>
                 </section>
-                <CustomModal toggle={this.toggleModal} modal={this.state.modal} data={this.state.modalData} className='modal-dialog-centered'/>
+                <CustomModal 
+                    toggle={this.toggleModal} 
+                    modal={this.state.modal} 
+                    data={this.state.modalData} 
+                    updateStock={updateCurrencyStock} 
+                    className='modal-dialog-centered'
+                    currencies={this.props.currencies}
+                    base={this.props.config.base}
+                />
             </React.Fragment>
         )
     }

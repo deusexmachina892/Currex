@@ -14,10 +14,12 @@ export const loadConfig = () => {
 }
 
 /**
- * Update Config while app is running
+ * Load initial Currency stocks
  */
-export const updateConfig = () => {
-
+export const loadCurrencies = () => {
+    const INITIAL_CURRENCY_ENDPOINT = '/currencies';
+    return axios.get(INITIAL_CURRENCY_ENDPOINT)
+            .then(res => res.data);
 }
 
 /**

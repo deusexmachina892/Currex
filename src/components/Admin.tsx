@@ -44,7 +44,6 @@ class Admin extends React.PureComponent<any, any>{
     handleSubmit(e){
         e.preventDefault();
         const { updateConfig } = this.props;
-        console.log(this.state)
         updateConfig(this.state);
     }
     renderFormFields(){

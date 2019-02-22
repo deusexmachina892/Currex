@@ -14,7 +14,7 @@ export function* getExchangeRateSaga(action){
       
     } catch(error){
         yield[
-            put({ type: GET_EXCHANGE_RATE_ERROR, payload: error})
+            put({ type: GET_EXCHANGE_RATE_ERROR, payload: error.message})
         ]
     }
 }
