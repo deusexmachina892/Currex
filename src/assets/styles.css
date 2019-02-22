@@ -19,6 +19,9 @@ h2 {
 h4 {
     font-size: 1.35em;
 }
+.loader{
+    text-align: center;
+}
 .nav{
     min-height: 250px;
     background: 

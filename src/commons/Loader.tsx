@@ -4,9 +4,8 @@ class Loader extends React.PureComponent{
     render(){
         return(
             <React.Fragment>
-                <h3>Cast</h3>
-                <div className='Loader'>
-                  Loader Hello Hello
+                <div className='loader'>
+                   Please wait! The content is being loaded...
                 </div>
             </React.Fragment>
         )
