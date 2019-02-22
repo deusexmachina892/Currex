@@ -1,32 +1,128 @@
 import * as React from 'react';
+import isEqual from 'lodash.isequal';
+import { ADMIN_CONFIG } from '../constants/config';
+import { Container, Row, Col, Form, FormGroup, InputGroup, InputGroupAddon, Input , Label, Button } from 'reactstrap';
 
 class Admin extends React.PureComponent<any, any>{
     constructor(props){
         super(props);
         this.state = {
+            refresh_rate: this.props.config.refresh_rate || '',
+            commissionPct: this.props.config.commissionPct ||'',
+            surcharge: this.props.config.surcharge ||'',
+            minCommission: this.props.config.minCommission ||'',
+            margin: this.props.config.margin || ''
+        }
+        this.renderFormFields = this.renderFormFields.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
 
+
+    // work on this
+    componentDidUpdate(prevProps, prevState){
+        if( this.props.config){
+            const configArray = [ 
+                                'refresh_rate', 
+                                'commissionPct', 
+                                'surcharge', 
+                                'minCommission', 
+                                'margin'
+                            ];
+            const updateState = {};
+            configArray.forEach( config => {
+                if(prevProps.config[config] !== this.props.config[config]){
+                    updateState[config] = this.props.config[config]
+                }
+            });
+
+            this.setState({
+                ...this.state,
+                ...updateState
+            });
         }
     }
+    handleSubmit(e){
+        e.preventDefault();
+        const { updateConfig } = this.props;
+        console.log(this.state)
+        updateConfig(this.state);
+    }
+    renderFormFields(){
+        return ADMIN_CONFIG.map(({ label, name}) => {
+            const value = this.state[name];
+            return(
+                <FormGroup key={name}>
+                <Row>
+                    <Col sm='5'>
+                        <Label>
+                            { label }
+                        </Label>
+                    </Col>
+                    <Col sm='3'>
+                        <InputGroup>
+                            <Input 
+                                laceholder='' 
+                                type='number' 
+                                step='1' 
+                                name={name} 
+                                value={value} 
+                                onChange={(e) => this.setState({ [name]: e.target.value})}
+                            />
+                            <InputGroupAddon addonType='append'>%</InputGroupAddon>
+                        </InputGroup>
+                    </Col>
+                </Row>
+            </FormGroup>
+            )
+        })
+    }
     render(){
+        const { refresh_rate } = this.state;
+        // console.log(this.props);
         return(
             <React.Fragment>
                 <section className='admin'>
-                    <header>Settings</header>
+                <Container>
+                    <header>
+                        <Row>
+                            <i className='fa fa-cog fa-2x' aria-hidden='true'></i>
+                            <h4>Settings</h4>
+                        </Row>
+                    </header>
                     <main>  
-                    <form>
-                        <label>Refresh currency Exchange Rate every</label>
-                        <input type="text" /> seconds
-                        <label>Commission</label>
-                        <input type="text" />
-                        <label>Surcharge</label>
-                        <input type="text" />
-                        <label>Minimum Commission</label>
-                        <input type="text" />
-                        <label>Buy/Sell Margin</label>
-                        <input type="text" />
-                        <input type="submit" className="btn" value="Update" />
-                    </form>
-                    </main> 
+                        
+                            <Form onSubmit={(e) => this.handleSubmit(e)}>
+                            <FormGroup>
+                                <Row>
+                                    <Col sm='5'>
+                                        Refresh currency exchange rates every
+                                    </Col>
+                                    <Col sm='2'>
+                                        <Input 
+                                            placeholder='Sec' 
+                                            type='number' 
+                                            step='1' 
+                                            name='refresh_rate' 
+                                            value={refresh_rate}
+                                            onChange={(e)=>this.setState({ refresh_rate: e.target.value })}
+                                        />
+                                    </Col>
+                                    <Col sm='1'>
+                                        seconds
+                                    </Col>
+                                </Row>   
+                            </FormGroup>
+                         
+                            { this.renderFormFields()}
+                            <FormGroup>
+                                 <Row >
+                                     <Col sm='5'></Col>
+                                     <Col sm='3'><Button style={{float: 'right', background:'#FFEF03', color:'#000', border:'none'}}>Update</Button></Col>
+                                </Row>
+                            </FormGroup>
+                            </Form>
+                    </main>
+                    </Container> 
                 </section>
             </React.Fragment>
         )

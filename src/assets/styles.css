@@ -16,12 +16,16 @@ h2 {
     color: #474545; 
     font-family: 'Source Sans Pro', sans-serif;
 }
+h4 {
+    font-size: 1.35em;
+}
 .nav{
     min-height: 250px;
     background: 
      /* top portion */
      linear-gradient(180deg, #FFEF03, #fff);
-    margin: -30px -20px 0 -20px;
+    /* margin: -30px -20px 0 -20px; */
+    overflow: hidden;
 }
 .nav main {
     display: grid;
@@ -31,6 +35,22 @@ h2 {
 .nav header{
     padding-top: 40px;
     text-align: right;  
+}
+.nav footer{
+    top: 0;
+    left: 0;
+    height:80px;
+    background: #FFEF03;
+    width: 100%;
+    -moz-transform: translate(5px, -30px) skew(43deg, -5deg);
+    -webkit-transform: translate(5px, -30px) skew(43deg, -5deg);
+    -o-transform: translate(5px, -30px) skew(43deg, -5deg);
+    -ms-transform: translate(5px, -30px) skew(43deg, -5deg);
+    transform: translate(5px, -30px) skew(43deg, -5deg);
+    margin-left: 20px;
+    margin-right: -20px;
+    margin-top:-20px;
+    
 }
 .nav .tabs{
     z-index: 1;
@@ -86,18 +106,7 @@ h2 {
 
 .nav:after{
     content: '';
-    top:0 !important;
-    right:0 !important;
-    background: #FFEF03;
-    display: inline-block;
-    height: 90px;
-    width: 100%;
-    transform: skew(50deg, -5deg);
-    transform-origin: 40% -10%;
-}
 
-.nav .tabs:after {
- 
 }
 
 .home{
@@ -129,27 +138,46 @@ h2 {
   outline: none;
 }
 .admin{
-    text-align: center;
-    margin: 0 15%;
+    text-align: start;
+    margin: 40px 15%;
 }
-@media only screen and (min-width: 601px) and (max-width: 900px) {
+
+.admin .row{
+    margin: 20px;
+}
+
+.admin header h4{
+    margin: 5px;
+}
+.admin main {
+    text-align: start;
+}
+
+@media only screen and (min-width: 623px) and (max-width: 900px) {
     .home {
         margin: 0 10%;
     }
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 622px) {
     .nav .tabs {
         display: none;
     }
     .nav .tabs-small{
         display: inline-block;
+        color: #000000;
     }
-    .nav:after{
+    .nav footer{
         height: 50px;
         width: 100%;
-        transform-origin: 20% -10%;
+       margin-top: -20px;
     }
     .home {
         margin: 0 5%;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .table {
+        width: 80%;
     }
 }

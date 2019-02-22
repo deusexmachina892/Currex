@@ -30,7 +30,6 @@ export const getExchangeRates = async (payload) => {
     const { base, currencies } = payload;
     const currencyString = Object.keys(currencies).filter(currency => currency !== 'USD').join(',');
     const CURREX_API_ENDPOINT = `https://api.exchangeratesapi.io/latest?base=${base}&symbols=${currencyString}`;
-    console.log(CURREX_API_ENDPOINT)
     //Make request
     return axios.get(CURREX_API_ENDPOINT)
     .then((res) => res.data);

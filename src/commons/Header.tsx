@@ -27,7 +27,10 @@ class Header extends React.PureComponent<any, any>{
                         <li className="logo" />
                     </ul>
                     </section>
+                    <section className="tabs-small"><i className="fa fa-bars"></i></section>
                 </main>
+                <footer></footer>
+               
             </section>
         )
     }

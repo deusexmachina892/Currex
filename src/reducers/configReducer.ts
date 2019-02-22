@@ -1,5 +1,12 @@
 import { Reducer } from 'redux';
-import { LOAD_CONFIG_REQUEST, LOAD_CONFIG_SUCCESS, LOAD_CONFIG_ERROR } from '../constants/actionTypes';
+import { 
+  LOAD_CONFIG_REQUEST, 
+  LOAD_CONFIG_SUCCESS, 
+  LOAD_CONFIG_ERROR,
+  UPDATE_CONFIG_REQUEST,
+  UPDATE_CONFIG_SUCCESS,
+  UPDATE_CONFIG_ERROR
+} from '../constants/actionTypes';
 
 // Type-safe initialState!
 const initialState = {
@@ -11,18 +18,27 @@ const initialState = {
 // everything will remain type-safe.
 const reducer: Reducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_CONFIG_REQUEST: {
+
+    case LOAD_CONFIG_REQUEST: 
       return { ...state, loading: true }
-    }
-    case LOAD_CONFIG_SUCCESS: {
+
+    case LOAD_CONFIG_SUCCESS: 
       return { ...state, loading: false, ...action.payload, timestamp: Date.now() }
-    }
-    case LOAD_CONFIG_ERROR: {
+
+    case LOAD_CONFIG_ERROR: 
       return { ...state, loading: false, errors: action.payload, timestamp: Date.now() }
-    }
-    default: {
+  
+    case UPDATE_CONFIG_REQUEST:
+      return { ...state, loading: true }
+    
+    case UPDATE_CONFIG_SUCCESS: 
+      return { ...state, loading: false, ...action.payload, timestamp: Date.now() }
+    
+    case UPDATE_CONFIG_ERROR:
+      return { ...state, loading: false, errors: action.payload, timestamp: Date.now() }
+    
+    default: 
       return state
-    }
   }
 }
 

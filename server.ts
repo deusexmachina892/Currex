@@ -7,17 +7,21 @@ if(process.env.NODE_ENV === 'development'){
     const webpack = require('webpack');
     const config = require('../webpack.config.js');
     const compiler = webpack(config);
+    var history = require('connect-history-api-fallback');
+    
 
     app.use('/config', express.static(path.join(process.cwd(), 'public', 'config.json')));
     /**
      * Use webpack-dev-middleware, which facilitates creating a bundle.js in memory and updating it automatically
      * based on changed files
      */
+    app.use(history());
     app.use(require('webpack-dev-middleware')(compiler,{
         /**
          * @noInfo Only display warnings and errors to the concsole
          */
         noInfo: true,
+        publicPath: '/',
         stats: {
             assets: false,
             colors: true,

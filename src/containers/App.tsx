@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/styles.css';
 
 // actions
-import { loadConfig, getExchangeRates } from '../actions';
+import { loadConfig, updateConfig, getExchangeRates } from '../actions';
 
 import Loader from '../commons/Loader';
 
@@ -58,15 +58,27 @@ class App extends React.Component<any, any>{
         }
     }
     render(){
-        const { config, exchangeRate } = this.props;
+        const { config, exchangeRate, updateConfig } = this.props;
         return(
             <div className='currEx'>
                 <BrowserRouter>
                     <div>
                         <Header />
                         <Switch>
-                            <Route path='/' exact render={(props)=> <HomeLazy config={config} exchangeRate={exchangeRate} {...props}/>}/>
-                            <Route path='/admin' exact render={(props) => <AdminLazy {...props}/>} />
+                            <Route path='/' exact render={
+                                (props)=> <HomeLazy 
+                                                config={config} 
+                                                exchangeRate={exchangeRate} 
+                                                {...props}
+                                            />
+                            }/>
+                            <Route path='/admin' exact render={
+                                (props) => <AdminLazy 
+                                                config={config} 
+                                                updateConfig={updateConfig} 
+                                                {...props}
+                                            />
+                            }/>
                         </Switch>
                     </div>
                 </BrowserRouter>
@@ -82,7 +94,8 @@ const mapStateToProps = ({ config, exchangeRate }) => ({
 })
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     loadConfig: () => dispatch(loadConfig()),
-    getExchangeRates: (payload) => dispatch(getExchangeRates(payload))
+    getExchangeRates: (payload) => dispatch(getExchangeRates(payload)),
+    updateConfig: (payload) => dispatch(updateConfig(payload))
   })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
