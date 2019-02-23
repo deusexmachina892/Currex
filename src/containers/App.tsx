@@ -32,6 +32,9 @@ const AdminLazy =   Loadable({
 class App extends React.Component<any, any>{
     constructor(props: any){
         super(props);
+        this.state = {
+            perfTime: performance.now()
+        }
     }
     componentDidMount(){
         const { loadConfig, loadCurrencies } = this.props;
@@ -43,6 +46,9 @@ class App extends React.Component<any, any>{
            const { config, currencies, exchangeRate, orchestrateGetExchangeRates, getExchangeRates  } = this.props;
            const { base, refresh_rate } = config;
            orchestrateGetExchangeRates( { base, currencies: currencies.data, refresh_rate, getExchangeRates } );
+        }
+        if(this.props.exchangeRate.rate){
+            console.log(performance.now() - this.state.perfTime)
         }
     }
     render(){

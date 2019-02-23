@@ -17,9 +17,7 @@ export class LoaderExchange extends React.PureComponent{
     render(){
         return(
             <React.Fragment>
-                <div className="loader-exchange-rate">
-                    <img src='/img/exchange-loader.gif' />
-                </div>
+                <div className="loader-exchange-rate" />
             </React.Fragment>
         )
     }

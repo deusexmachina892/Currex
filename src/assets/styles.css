@@ -219,7 +219,14 @@ h4 {
     transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
   }
 
-
+.loader-exchange-rate{
+    background: url('../assets/exchange-loader.gif') no-repeat;
+    background-size: contain;
+    background-position: center center;
+    height: 20px;
+    width: 20px;
+    margin: 0 auto;
+}
   /** Exchange Loader **/
   @keyframes loader-exchange {
     0% {
