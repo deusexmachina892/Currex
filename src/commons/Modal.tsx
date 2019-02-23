@@ -3,6 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, InputGroup, Input, 
 import isEmpty from 'lodash.isempty';
 import pick from 'lodash.pick';
 
+import { formatDigits } from '../helpers/formatDigits';
 import { DISPLAY_CONFIG } from '../constants/config';
 
 const INITIAL_STATE = {
@@ -81,7 +82,7 @@ class CustomModal extends React.PureComponent<any, any> {
     if(!isEmpty(this.props.data)){
         const { commissionPct, surcharge, minCommission, rate, type } = this.props.data;
         if( commissionPct && surcharge && minCommission && rate && type){
-            let subtotal = amount/rate; // rate is in terms of base currency, for ex 1 USD = 0.8 EUR; subtotal is always in base currency
+            let subtotal = Number(amount)/Number(rate); // rate is in terms of base currency, for ex 1 USD = 0.8 EUR; subtotal is always in base currency
             let commission = Math.max(((commissionPct+surcharge)/100 * subtotal), minCommission);
 
             // if buy, add commission to total payable base currency, else subtract from receivable base
@@ -135,7 +136,7 @@ class CustomModal extends React.PureComponent<any, any> {
                         <b>{ title }</b>
                     </span>
                     <span>
-                        { value }
+                        { title === 'Exchange Rate'?formatDigits(value, 4):formatDigits(value, 2) }
                     </span>
                 </section>
             </React.Fragment>

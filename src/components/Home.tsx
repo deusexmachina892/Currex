@@ -3,6 +3,7 @@ import { Table, Tooltip } from 'reactstrap';
 import * as moment from 'moment';
 import isEmpty from 'lodash.isempty';
 import isEqual from 'lodash.isequal';
+import { formatDigits } from '../helpers/formatDigits';
 import CustomModal from '../commons/Modal';
 import { Loader, LoaderExchange } from '../commons/Loaders';
 
@@ -31,10 +32,13 @@ class Home extends React.PureComponent<any, any>{
         }
         if(!isEqual(prevProps.exchangeRate.rates, this.props.exchangeRate.rates)){
             if(this.state.modal){
+                console.log(this.state.modalData)
                 this.setState({
                     modalData: {
                         ...this.state.modalData,
-                        rate: parseFloat(this.props.exchangeRate.rates[this.state.modalData.currency]).toFixed(4)
+                        rate: formatDigits(this.state.modalData.type==='Buy'?
+                                this.props.exchangeRate.rates[this.state.modalData.currency].buy
+                                : this.props.exchangeRate.rates[this.state.modalData.currency].sell, 2)
                     }
                 })
             }
@@ -86,8 +90,7 @@ class Home extends React.PureComponent<any, any>{
         const currencies = this.props.currencies.data;
         return Object.keys(currencies).map(currency => {
             if (currency !== base){
-                const buyRate = parseFloat((rates[currency] * (1+ (margin/100))).toString()).toFixed(4);
-                const sellRate = parseFloat((rates[currency] * (1-(margin/100))).toString()).toFixed(4);
+              
                 const warningLevel = currencies[currency].stock <= currencies[currency].warningLevel;
                 return(
                     <tr key={currency} >
@@ -98,13 +101,13 @@ class Home extends React.PureComponent<any, any>{
                                 currency, 
                                 currencies[currency].symbol, 
                                 'Buy', 
-                                buyRate
+                                rates[currency].buy
                                 )
                             :this.showDisplayMsg()}
                             >
                                 {
                                     rates[currency]?
-                                    buyRate
+                                    formatDigits(rates[currency].buy, 4)
                                     :<LoaderExchange/>
                                 }
                         </td>
@@ -114,18 +117,18 @@ class Home extends React.PureComponent<any, any>{
                                 currency, 
                                 currencies[currency].symbol, 
                                 'Sell', 
-                                sellRate
+                                rates[currency].sell
                                 )
                             :this.showDisplayMsg()}
                             >
                             {
                                 rates[currency]? 
-                                    sellRate 
+                                    formatDigits(rates[currency].sell, 4)
                                     :<LoaderExchange />
                             }
                         </td>
                         <td className={warningLevel?'warn':'ok'}>
-                            {parseFloat(currencies[currency].stock).toFixed(2)}
+                            {formatDigits(currencies[currency].stock, 2)}
                         </td>
                     </tr>
                 )
@@ -143,7 +146,7 @@ class Home extends React.PureComponent<any, any>{
                   You have <span 
                                 className={warningLevelForBase?'warn':'okLevel'}
                             >
-                            {parseFloat(currencies.data[config.base].stock).toFixed(2)} {config.base}
+                            {formatDigits(currencies.data[config.base].stock, 2)} {config.base}
                             </span>{' '}left.
                  </header>
                   <main>

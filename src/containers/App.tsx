@@ -44,10 +44,15 @@ class App extends React.Component<any, any>{
     componentDidUpdate(prevProps, prevState){
         if (!this.props.config.loading && !isEqual(prevProps.config, this.props.config)){
            const { config, currencies, exchangeRate, orchestrateGetExchangeRates, getExchangeRates  } = this.props;
-           const { base, refresh_rate } = config;
-           orchestrateGetExchangeRates( { base, currencies: currencies.data, refresh_rate, getExchangeRates } );
+           const { base, refresh_rate, margin } = config;
+
+           // action for first Api call for better performance
+           getExchangeRates({ base, currencies: currencies.data, margin })
+
+           // orchestration action with timer for api calls
+           orchestrateGetExchangeRates( { base, currencies: currencies.data, margin, refresh_rate, getExchangeRates } );
         }
-        if(this.props.exchangeRate.rate){
+        if(this.props.exchangeRate.rates){
             console.log(performance.now() - this.state.perfTime)
         }
     }
