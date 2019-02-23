@@ -52,12 +52,12 @@ class Admin extends React.PureComponent<any, any>{
             return(
                 <FormGroup key={name}>
                 <Row>
-                    <Col sm='5'>
+                    <Col md='5'>
                         <Label>
                             { label }
                         </Label>
                     </Col>
-                    <Col sm='3'>
+                    <Col md='3'>
                         <InputGroup>
                             <Input 
                                 laceholder='' 
@@ -93,10 +93,10 @@ class Admin extends React.PureComponent<any, any>{
                             <Form onSubmit={(e) => this.handleSubmit(e)}>
                             <FormGroup>
                                 <Row>
-                                    <Col sm='5'>
+                                    <Col  md='5'>
                                         Refresh currency exchange rates every
                                     </Col>
-                                    <Col sm='2'>
+                                    <Col  md='3'>
                                         <Input 
                                             placeholder='Sec' 
                                             type='number' 
@@ -106,7 +106,7 @@ class Admin extends React.PureComponent<any, any>{
                                             onChange={(e)=>this.setState({ refresh_rate: e.target.value })}
                                         />
                                     </Col>
-                                    <Col sm='1'>
+                                    <Col md='1'>
                                         seconds
                                     </Col>
                                 </Row>   
@@ -115,8 +115,8 @@ class Admin extends React.PureComponent<any, any>{
                             { this.renderFormFields()}
                             <FormGroup>
                                  <Row >
-                                     <Col sm='5'></Col>
-                                     <Col sm='3'><Button style={{float: 'right', background:'#FFEF03', color:'#000', border:'none'}}>Update</Button></Col>
+                                     <Col md='5'></Col>
+                                     <Col md='3'><Button style={{float: 'right', background:'#FFEF03', color:'#000', border:'none'}}>Update</Button></Col>
                                 </Row>
                             </FormGroup>
                             </Form>

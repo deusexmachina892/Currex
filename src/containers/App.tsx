@@ -13,7 +13,7 @@ import '../assets/styles.css';
 // actions
 import { loadConfig, loadCurrencies, updateConfig, orchestrateGetExchangeRates, updateCurrencyStock, getExchangeRates } from '../actions';
 
-import Loader from '../commons/Loader';
+import { Loader } from '../commons/Loaders';
 
 import Header from '../commons/Header';
 import Home from '../components/Home';

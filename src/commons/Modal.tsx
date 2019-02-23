@@ -151,15 +151,15 @@ class CustomModal extends React.PureComponent<any, any> {
         <Modal isOpen={this.props.modal} toggle={this.props.toggle} className={this.props.className}>
           <ModalHeader toggle={this.props.toggle}>{type}{' '}{currency}</ModalHeader>
           <ModalBody>
-              {!isEmpty(msg)?<span style={{ color: msg.color }}>{msg.data}</span>
-                        :''
-              }
+              <div style={{height: '20px'}}>{!isEmpty(msg)?<span style={{ color: msg.color }}>{msg.data}</span>
+                        :'Please enter an amount to start the transaction'
+              }</div>
           <InputGroup>
             <InputGroupAddon addonType="prepend">{symbol}</InputGroupAddon>
             <Input placeholder="Amount" type="number" step="1" value={this.state.currentAmount} onChange={(e) => this.calculateMeta(e.target.value)}/>
             <InputGroupAddon addonType="append">.00</InputGroupAddon>
           </InputGroup>
-          <b>(* All calculations below are in { base })</b>
+          <b style={{margin:'10px'}}>(* All calculations below are in { base })</b>
              { this.renderContent() }
           </ModalBody>
           <ModalFooter>

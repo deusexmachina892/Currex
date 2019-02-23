@@ -91,7 +91,7 @@ h4 {
     background-repeat: no-repeat;
     transition: background-size .5s, color .5s;
     background-size: 100% 0%;
-    background-position: 0% 50%;
+    background-position: 0% 0%;
 }
 
 .nav .tabs a:hover, .nav .tabs a:active{
@@ -117,8 +117,19 @@ h4 {
     text-align: center;
     margin: 0 15%;
 }
+
+.home .info .warn{
+    color: #FF0000;
+}
+.home .info  .okLevel {
+    color: #000000!important;
+}
 .home main {
   margin-top: 75px;    
+}
+.home main .loader-msg{
+    height: 30px;
+    color: #787878;
 }
 .home main table>tbody>tr:hover, .home main table>tbody>tr:active{
     cursor: pointer;
@@ -128,6 +139,7 @@ h4 {
     display: flex;
     flex-flow: column wrap;
 }
+
 .home .modal .modal-content .modal-body section{
     display: flex;
     flex-flow: row wrap;
@@ -156,6 +168,76 @@ h4 {
 .admin main {
     text-align: start;
 }
+
+@keyframes loader {
+    0% {
+      -webkit-transform: translate(-50%, -50%) rotate(0deg);
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      -webkit-transform: translate(-50%, -50%) rotate(360deg);
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+  @-webkit-keyframes loader {
+    0% {
+      -webkit-transform: translate(-50%, -50%) rotate(0deg);
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      -webkit-transform: translate(-50%, -50%) rotate(360deg);
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  /** Main Loader **/
+  .loader {
+    position: relative;
+  }
+  .loader div,
+  .loader div:after {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ffef03;
+    border-top-color: transparent;
+    border-radius: 50%;
+  }
+  .loader div {
+    -webkit-animation: loader 1s linear infinite;
+    animation: loader 1s linear infinite;
+    top: 100px;
+    left: 100px;
+  }
+  .loader div:after {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+  .loader {
+    width: 200px !important;
+    height: 200px !important;
+    -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+    transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+  }
+
+
+  /** Exchange Loader **/
+  @keyframes loader-exchange {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @-webkit-keyframes loader-exchange {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
 
 @media only screen and (max-width: 622px) {
     .nav .tabs {
@@ -247,6 +329,7 @@ h4 {
         margin: 0 5%;
     }
 }
+
 
 @media only screen and (max-width: 320px) {
     .table {

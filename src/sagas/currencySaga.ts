@@ -31,12 +31,12 @@ export function* updateCurrencyStockSaga(action){
                 // updates
 
                 // check whether value is less than stock value for base currency
-                if ( Number(value) > currencies[base].stock) {
+                if ( type==='Sell' && Number(value) > currencies[base].stock ) {
                     const error = `Sorry! We don\'t have the requested amount of ${base} in stock`;
                     throw new Error(error);
                 }
                 // check whethter currency amount is less than stock value for current currency
-                if ( Number(currencyAmount) > currencies[currency].stock) {
+                if ( type==='Buy' && Number(currencyAmount) > currencies[currency].stock) {
                     const error = `Sorry! We don\'t have the requested amount of ${currency} in stock`;
                     throw new Error(error);
                 }

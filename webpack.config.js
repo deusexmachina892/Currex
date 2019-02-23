@@ -58,7 +58,7 @@ module.exports =  {
                 use: ['style-loader', 'css-loader']
             },
             {
-                test: /\.(png|woff|woff2|eot|ttf|svg|jpe?g)$/,
+                test: /\.(a?png|woff|woff2|gif|eot|ttf|svg|jpe?g)$/,
                 loader: 'file-loader',
                 query:{
                     outputPath: './img/',
