@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Table } from 'reactstrap';
 import * as moment from 'moment';
 import isEmpty from 'lodash.isempty';
+import isEqual from 'lodash.isequal';
 import CustomModal from '../commons/Modal';
 
 class Home extends React.PureComponent<any, any>{
@@ -17,7 +18,18 @@ class Home extends React.PureComponent<any, any>{
         this.handleRowClick = this.handleRowClick.bind(this);
         this.renderCurrencyInfo = this.renderCurrencyInfo.bind(this);
     }
-
+    componentDidUpdate(prevProps, prevState){
+        if(!isEqual(prevProps.exchangeRate.rates, this.props.exchangeRate.rates)){
+            if(this.state.modal){
+                this.setState({
+                    modalData: {
+                        ...this.state.modalData,
+                        rate: parseFloat(this.props.exchangeRate.rates[this.state.modalData.currency]).toFixed(4)
+                    }
+                })
+            }
+        }
+    }
     handleRowClick(currency, symbol, type, rate){
 
         // metadata for displaying on modal

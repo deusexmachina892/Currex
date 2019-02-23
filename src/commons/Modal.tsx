@@ -64,6 +64,13 @@ class CustomModal extends React.PureComponent<any, any> {
                 ...updateState
             });
         }
+
+        // recalculate on rate change
+        if(prevProps.data.rate && this.props.data.rate){
+            if(prevProps.data.rate !== this.props.data.rate){
+                this.calculateMeta(this.state.currencyAmount);
+            }
+        }
       } else {
           // clean up on modal close
           this.setState(INITIAL_STATE);

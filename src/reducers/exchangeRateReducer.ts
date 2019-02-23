@@ -1,6 +1,8 @@
 
 import { Reducer } from 'redux';
+import isEqual from 'lodash.isequal';
 import { GET_EXCHANGE_RATE_REQUEST, GET_EXCHANGE_RATE_SUCCESS, GET_EXCHANGE_RATE_ERROR } from '../constants/actionTypes';
+import { rateStochastics } from '../helpers/rateStochastics';
 
 // Type-safe initialState!
 const initialState = {
@@ -17,7 +19,9 @@ const reducer: Reducer = (state = initialState, action) => {
       return { ...state, loading: true }
 
     case GET_EXCHANGE_RATE_SUCCESS: 
-      return { ...state, loading: false, rates: action.payload.rates, timestamp: Date.now() }
+      const { rates } = action.payload;
+      const ratesForStore  = isEqual(state.rates, rates)?rates:rateStochastics(rates)
+      return { ...state, loading: false, rates: ratesForStore, timestamp: Date.now() }
     
     case GET_EXCHANGE_RATE_ERROR: 
       return { ...state, loading: false, errors: action.payload, timestamp: Date.now() }

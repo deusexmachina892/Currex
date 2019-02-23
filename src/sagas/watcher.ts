@@ -1,10 +1,11 @@
 import { takeLatest, takeEvery } from 'redux-saga/effects';
 import { loadConfigSaga, updateConfigSaga } from './configSaga';
-import { getExchangeRateSaga } from './exchangeSaga';
+import { orchestrateGetExchangeRateSaga, getExchangeRateSaga } from './exchangeSaga';
 import { loadCurrenciesSaga, updateCurrencyStockSaga } from './currencySaga';
 import { 
   LOAD_CONFIG_REQUEST, 
   LOAD_CURRENCIES_REQUEST,
+  ORCHESTRATE_GET_EXCHANGE_RATE_REQUEST,
   GET_EXCHANGE_RATE_REQUEST, 
   UPDATE_CONFIG_REQUEST, 
   UPDATE_CURRENCY_STOCK_REQUEST 
@@ -24,7 +25,11 @@ export function* watchUpdateConfig(){
 }
 
 export function* watchGetExchangeRate() {
-  yield takeLatest(GET_EXCHANGE_RATE_REQUEST, getExchangeRateSaga);
+  yield takeEvery(GET_EXCHANGE_RATE_REQUEST, getExchangeRateSaga);
+}
+
+export function* watchOrchestrateGetExchangeRate() {
+  yield takeEvery(ORCHESTRATE_GET_EXCHANGE_RATE_REQUEST, orchestrateGetExchangeRateSaga);
 }
 
 export function* watchCurrencyStockUpdate(){

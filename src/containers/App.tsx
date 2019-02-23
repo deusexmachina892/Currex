@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/styles.css';
 
 // actions
-import { loadConfig, loadCurrencies, updateConfig, getExchangeRates, updateCurrencyStock } from '../actions';
+import { loadConfig, loadCurrencies, updateConfig, orchestrateGetExchangeRates, updateCurrencyStock, getExchangeRates } from '../actions';
 
 import Loader from '../commons/Loader';
 
@@ -40,9 +40,9 @@ class App extends React.Component<any, any>{
     }
     componentDidUpdate(prevProps, prevState){
         if (!this.props.config.loading && !isEqual(prevProps.config, this.props.config)){
-           const { config, currencies, getExchangeRates  } = this.props;
-           const { base } = config;
-           getExchangeRates( { base, currencies: currencies.data } );
+           const { config, currencies, exchangeRate, orchestrateGetExchangeRates, getExchangeRates  } = this.props;
+           const { base, refresh_rate } = config;
+           orchestrateGetExchangeRates( { base, currencies: currencies.data, refresh_rate, getExchangeRates } );
         }
     }
     render(){
@@ -86,6 +86,7 @@ const mapStateToProps = ({ config, currencies, exchangeRate }) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     loadConfig: () => dispatch(loadConfig()),
     loadCurrencies: () => dispatch(loadCurrencies()),
+    orchestrateGetExchangeRates: (payload) => dispatch(orchestrateGetExchangeRates(payload)),
     getExchangeRates: (payload) => dispatch(getExchangeRates(payload)),
     updateConfig: (payload) => dispatch(updateConfig(payload)),
     updateCurrencyStock: (payload) => dispatch(updateCurrencyStock(payload))

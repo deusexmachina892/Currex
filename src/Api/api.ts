@@ -28,7 +28,7 @@ export const loadCurrencies = () => {
 * @params { String } searchQuery
 * @return { Array } 
 */
-export const getExchangeRates = async (payload) => {
+export const getExchangeRatesFromApi = async (payload) => {
     const { base, currencies } = payload;
     const currencyString = Object.keys(currencies).filter(currency => currency !== 'USD').join(',');
     const CURREX_API_ENDPOINT = `https://api.exchangeratesapi.io/latest?base=${base}&symbols=${currencyString}`;

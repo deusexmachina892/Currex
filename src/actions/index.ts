@@ -2,11 +2,15 @@ import { action } from 'typesafe-actions';
 import { 
     LOAD_CONFIG_REQUEST,
     LOAD_CURRENCIES_REQUEST,
+    ORCHESTRATE_GET_EXCHANGE_RATE_REQUEST,
     GET_EXCHANGE_RATE_REQUEST, 
     UPDATE_CONFIG_REQUEST, 
     UPDATE_CURRENCY_STOCK_REQUEST
    } from '../constants/actionTypes';
 
+export const orchestrateGetExchangeRates = (payload) => {
+    return action(ORCHESTRATE_GET_EXCHANGE_RATE_REQUEST, payload);
+}
 export const getExchangeRates = (payload) => {
     return action(GET_EXCHANGE_RATE_REQUEST, payload);
 }

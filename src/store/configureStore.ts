@@ -9,7 +9,8 @@ import rootReducer from '../reducers';
 import rootSaga from '../sagas';
 
 export default function configureStore(
-    history: History
+    history: History,
+    initialState = {}
   ): Store {
     // create the composing function for our middlewares
     const composeEnhancers = composeWithDevTools({})
@@ -20,7 +21,7 @@ export default function configureStore(
     // we'll be passing from our entry point.
     const store = createStore(
      rootReducer,
-      {},
+      initialState,
       composeEnhancers(applyMiddleware(routerMiddleware(history), sagaMiddleware))
     )
   
