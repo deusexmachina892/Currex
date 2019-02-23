@@ -29,6 +29,7 @@ h4 {
      linear-gradient(180deg, #FFEF03, #fff);
     /* margin: -30px -20px 0 -20px; */
     overflow: hidden;
+    /* z-index: 9999; */
 }
 .nav main {
     display: grid;
@@ -52,7 +53,6 @@ h4 {
     transform: translate(5px, -30px) skew(43deg, -5deg);
     margin-left: 20px;
     margin-right: -20px;
-    margin-top:-20px;
     
 }
 .nav .tabs{
@@ -61,6 +61,7 @@ h4 {
 .nav .tabs-small{
     display: none;
 }
+
 .nav .tabs ul{
     display: flex;  
     flex-flow: row wrap;
@@ -156,22 +157,90 @@ h4 {
     text-align: start;
 }
 
-@media only screen and (min-width: 623px) and (max-width: 900px) {
-    .home {
-        margin: 0 10%;
-    }
-}
 @media only screen and (max-width: 622px) {
     .nav .tabs {
         display: none;
     }
     .nav .tabs-small{
-        display: inline-block;
+        display: flex;
+        justify-content: flex-end;
         color: #000000;
+        margin-bottom: 30px; 
+    }
+
+    .nav .tabs-small .ham{
+      margin: 30px;
+    }
+
+    .nav .tabs-small:hover, .nav .tabs-small:active{
+        cursor: pointer;    
+    }
+
+    .nav .tabs-small .nav-small-menu{
+        position: fixed;
+        /* display: block; */
+        background: #fff;
+        border-left: 1px solid #ddd;
+        box-shadow: 2px 2px #ddd;
+        height: 100vh;
+        width: 40vw;
+        z-index: 9999!important;
+    }
+
+    .nav-small-menu-open {
+        animation: openMenu 0.4s ease-out forwards;
+    }
+    .nav-small-menu-closed {
+        animation: closeMenu 0.4s ease-out forwards;
+    }
+
+    @keyframes openMenu {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(0);   }
+    }
+    
+    @keyframes closeMenu {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(100%);}
+    }
+    .nav .tabs-small .nav-small-menu .close-menu{
+        display: flex;
+        justify-content: flex-end;
+        margin: 10px 10px;
+        color: #787878;
+    }
+    .nav .tabs-small .nav-small-menu .logo{
+        display: block;
+        background: url('../assets/logo.png') no-repeat!important;
+        background-size: contain !important;
+        background-position: center center !important;
+        min-width: 100px;
+        min-height: 100px;
+        margin: 10px auto;
+        padding: 20px;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .nav .tabs-small .nav-small-menu .menu div{
+        border-bottom: 1px solid #ddd;
+        padding: 20px;
+        text-align: center;
+    }
+    .nav .tabs-small .nav-small-menu .menu div a{
+        text-decoration: none;
+        color: #ddd;
+        font-weight: 600;
+        font-size: 1.25em;
+    }
+    .nav .tabs-small .nav-small-menu div a:hover, 
+    .nav .tabs-small .nav-small-menu div a:active,
+    .nav .tabs-small .nav-small-menu div a:focus {
+        color: #787878;
+        outline: none;
     }
     .nav footer{
         height: 50px;
-        width: 100%;
        margin-top: -20px;
     }
     .home {
@@ -182,5 +251,48 @@ h4 {
 @media only screen and (max-width: 320px) {
     .table {
         width: 80%;
+    }
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .nav footer{
+        margin-top:-20px;   
+        }
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .nav footer{
+        margin-top:-70px;   
+        }
+} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .home {
+        margin: 0 10%;
+    }
+    .nav footer{
+        margin-top:-70px;   
+        }
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .home {
+        margin: 0 10%;
+    }
+    .nav footer{
+        margin-top:-50px;   
+        }
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .home {
+        margin: 0 10%;
+    }
+    .nav footer{
+    margin-top:-20px;   
     }
 }

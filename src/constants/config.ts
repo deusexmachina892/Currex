@@ -7,4 +7,15 @@ export const ADMIN_CONFIG = [
 ];
 
 // config for modal display
-export const DISPLAY_CONFIG = ['rate', 'subtotal', 'commission', 'totalBase'];
+export const DISPLAY_CONFIG = [
+    'rate', 
+    'subtotal', 
+    'commission', 
+    'totalBase'
+];
+
+// config for nav menu items
+export const NAV_MENU_CONFIG = [
+    {item: 'Home' , link: '/'},
+    {item: 'Admin', link: '/admin'}
+];
