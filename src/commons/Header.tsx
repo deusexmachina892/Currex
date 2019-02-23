@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import { NAV_MENU_CONFIG } from '../constants/config';
 
@@ -8,6 +8,7 @@ import Menu from './Menu';
 
 class Header extends React.PureComponent<any, any>{
     private homeRef = React.createRef<Link>();
+    private adminRef = React.createRef<Link>();
     constructor(props){
         super(props);
         this.state = {
@@ -19,7 +20,8 @@ class Header extends React.PureComponent<any, any>{
         this.unMountMenuActionComplete = this.unMountMenuActionComplete.bind(this);
     }
     componentDidMount(){
-        this.focusedSection(findDOMNode(this.homeRef.current));
+        const node = this.props.location.pathname === '/'? this.homeRef.current:this.adminRef.current;
+        this.focusedSection(findDOMNode(node));
       }
     focusedSection(node){
        node.focus();
@@ -45,7 +47,7 @@ class Header extends React.PureComponent<any, any>{
         return NAV_MENU_CONFIG.map(({ item, link }) => {
             return(
                 <li key={item}>
-                    <Link to={link} ref={item === 'Home'?this.homeRef:''}>{item}</Link>
+                    <Link to={link} ref={item === 'Home'?this.homeRef: this.adminRef}>{item}</Link>
                 </li>
             )
         })
@@ -74,6 +76,7 @@ class Header extends React.PureComponent<any, any>{
                                     unMount={this.state.unmountMenu}
                                     unMountAction={this.unmountMenuAction}
                                     unMountActionComplete={this.unMountMenuActionComplete}
+                                    mountPath={this.props.location.pathname}
                                 />
                                }             
                     </section>
@@ -85,4 +88,4 @@ class Header extends React.PureComponent<any, any>{
     }
 }
 
-export default Header;
+export default withRouter(Header);
