@@ -5,7 +5,7 @@ import * as passport from 'passport';
 import * as compression from "compression";
 import * as expressValidator from "express-validator";
 import * as session from 'express-session';
-import mongo from "connect-mongo";
+import * as mongo from "connect-mongo";
 import flash from "express-flash";
 import { DB, SESSION_SECRET } from './config/keys';
 
