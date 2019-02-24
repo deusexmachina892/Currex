@@ -40,9 +40,6 @@ interface AppProps {
 class App extends React.Component<any, any>{
     constructor(props: any){
         super(props);
-        this.state = {
-            perfTime: performance.now()
-        }
     }
     componentDidMount(){
         const { loadConfig, loadCurrencies } = this.props;
@@ -59,9 +56,6 @@ class App extends React.Component<any, any>{
 
            // orchestration action with timer for api calls
            orchestrateGetExchangeRates( { base, currencies: currencies.data, margin, refresh_rate, getExchangeRates } );
-        }
-        if(this.props.exchangeRate.rates){
-            console.log(performance.now() - this.state.perfTime)
         }
     }
     render(){

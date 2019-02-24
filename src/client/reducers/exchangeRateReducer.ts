@@ -20,7 +20,6 @@ const reducer: Reducer = (state = initialState, action) => {
       return { ...state, loading: true }
 
     case GET_EXCHANGE_RATE_SUCCESS: 
-    console.log(action.payload)
       const { rates, margin } = action.payload;
       const ratesOfCurrencies = rates.rates;
       const ratesStochastics  = isEqual(state.rates, ratesOfCurrencies)?ratesOfCurrencies:rateStochastics(ratesOfCurrencies);
