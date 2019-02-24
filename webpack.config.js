@@ -4,7 +4,7 @@ const htmlWebPackPlugin = require('html-webpack-plugin');
 const cleanWebPackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-const APP_DIR  = path.resolve(__dirname, 'src', 'index.tsx');
+const APP_DIR  = path.resolve(__dirname, 'src', 'client', 'index.tsx');
 const BUILD_DIR = path.join(__dirname, 'dist', 'client');
 
 let plugins = [

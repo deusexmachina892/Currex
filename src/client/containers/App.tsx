@@ -29,6 +29,14 @@ const AdminLazy =   Loadable({
     loader: () => import('../components/Admin'),
     loading: Loader,
 });
+
+interface AppProps {
+    config: object,
+    currencies: object,
+    exchangeRate: object
+
+}
+
 class App extends React.Component<any, any>{
     constructor(props: any){
         super(props);
@@ -46,7 +54,7 @@ class App extends React.Component<any, any>{
            const { config, currencies, exchangeRate, orchestrateGetExchangeRates, getExchangeRates  } = this.props;
            const { base, refresh_rate, margin } = config;
 
-           // action for first Api call for better performance
+           // action for first Api call to reduce initial load time
            getExchangeRates({ base, currencies: currencies.data, margin })
 
            // orchestration action with timer for api calls

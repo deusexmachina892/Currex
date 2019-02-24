@@ -1,8 +1,58 @@
 import * as express from 'express';
+import * as mongoose from 'mongoose';
 import * as path from 'path';
+import * as passport from 'passport';
+import * as compression from "compression";
+import * as expressValidator from "express-validator";
+import * as session from 'express-session';
+import mongo from "connect-mongo";
+import flash from "express-flash";
+import { DB, SESSION_SECRET } from './config/keys';
 
+// register User Schema
+require('./models/User');
+
+//register passport conf
+require('./services/passport');
 const app: express.Application = express();
+const MongoStore = mongo(session);
+mongoose.connect(DB, { useNewUrlParser: true })
+    .then(() => {
+        console.log('Connected to DB');
+    });
 
+app.use(compression());
+app.use(expressValidator());
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use((req, res, next) => {
+    res.locals.user = req.user;
+    next();
+  });
+app.use(session({
+    resave: true,
+    saveUninitialized: true,
+    secret: SESSION_SECRET,
+    store: new MongoStore({
+      url: DB,
+      autoReconnect: true
+    })
+}));
+app.use((req, res, next) => {
+    // After successful login, redirect back to the intended page
+    if (!req.user &&
+      req.path !== "/login" &&
+      req.path !== "/signup" &&
+      !req.path.match(/^\/auth/) &&
+      !req.path.match(/\./)) {
+      req.session.returnTo = req.path;
+    } else if (req.user &&
+      req.path == "/account") {
+      req.session.returnTo = req.path;
+    }
+    next();
+});
 app.use('/config', express.static(path.join(process.cwd(), 'data', 'config.json')));
 app.use('/currencies', express.static(path.join(process.cwd(), 'data', 'currency.json')));
 
@@ -46,6 +96,7 @@ if(process.env.NODE_ENV === 'development'){
     })
 } else {
     app.use(express.static(path.join(process.cwd(), 'dist', 'client')));
+    
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(process.cwd(), 'dist', 'client', 'index.html'))
     })
