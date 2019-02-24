@@ -11,7 +11,7 @@
       "jsx": "react",                           
       "declaration": false,                     
       "sourceMap": true,                        
-      "outDir": "./dist/",                    
+      "outDir": "./dist/client",                    
       "strict": false,                           
       "moduleResolution": "node",   
       "allowSyntheticDefaultImports" : true,
@@ -28,6 +28,7 @@
   "exclude": [
     "node_modules",
     "dist",
-    "webpack"
+    "webpack",
+    "src/server"
 ]                                 
 }

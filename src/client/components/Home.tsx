@@ -88,7 +88,7 @@ class Home extends React.PureComponent<any, any>{
         const { base, margin} = config;
         const { rates } = exchangeRate;
         const currencies = this.props.currencies.data;
-        return Object.keys(currencies).map(currency => {
+        return currencies && Object.keys(currencies).map(currency => {
             if (currency !== base){
               
                 const warningLevel = currencies[currency].stock <= currencies[currency].warningLevel;
@@ -138,7 +138,10 @@ class Home extends React.PureComponent<any, any>{
     render(){
         const { config, currencies, exchangeRate, updateCurrencyStock } = this.props;
         const { displayLoaderMsg } = this.state;
-        const warningLevelForBase = currencies.data[config.base].stock <= currencies.data[config.base].warningLevel;
+        let warningLevelForBase = false;
+        if (currencies && currencies.data && config && config.base){
+            warningLevelForBase = currencies.data[config.base].stock <= currencies.data[config.base].warningLevel;
+        }
         return(
             <React.Fragment>
                 <section className='home'>
@@ -146,7 +149,9 @@ class Home extends React.PureComponent<any, any>{
                   You have <span 
                                 className={warningLevelForBase?'warn':'okLevel'}
                             >
-                            {formatDigits(currencies.data[config.base].stock, 2)} {config.base}
+                            {currencies && currencies.data && currencies.data[config.base] && 
+                                    formatDigits(currencies.data[config.base].stock, 2)} 
+                            {' '}{config && config.base && config.base}
                             </span>{' '}left.
                  </header>
                   <main>

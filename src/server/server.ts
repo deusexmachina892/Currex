@@ -6,24 +6,24 @@ import * as compression from "compression";
 import * as expressValidator from "express-validator";
 import * as session from 'express-session';
 import * as mongo from "connect-mongo";
-import flash from "express-flash";
-import { DB, SESSION_SECRET } from './config/keys';
+// import * as flash from 'connect-flash';
+import config from './config/keys';
 
 // register User Schema
 require('./models/User');
 
 //register passport conf
-require('./services/passport');
+// require('./services/passport');
 const app: express.Application = express();
 const MongoStore = mongo(session);
-mongoose.connect(DB, { useNewUrlParser: true })
+
+ (<any>mongoose).Promise = global.Promise;
+mongoose.connect(config.DB)
     .then(() => {
         console.log('Connected to DB');
     });
-
-app.use(compression());
-app.use(expressValidator());
-app.use(flash());
+// app.use(compression());
+// app.use(expressValidator());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
@@ -33,26 +33,26 @@ app.use((req, res, next) => {
 app.use(session({
     resave: true,
     saveUninitialized: true,
-    secret: SESSION_SECRET,
+    secret: config.SESSION_SECRET,
     store: new MongoStore({
-      url: DB,
+      url: config.DB,
       autoReconnect: true
     })
 }));
-app.use((req, res, next) => {
-    // After successful login, redirect back to the intended page
-    if (!req.user &&
-      req.path !== "/login" &&
-      req.path !== "/signup" &&
-      !req.path.match(/^\/auth/) &&
-      !req.path.match(/\./)) {
-      req.session.returnTo = req.path;
-    } else if (req.user &&
-      req.path == "/account") {
-      req.session.returnTo = req.path;
-    }
-    next();
-});
+// app.use((req, res, next) => {
+//     // After successful login, redirect back to the intended page
+//     if (!req.user &&
+//       req.path !== "/login" &&
+//       req.path !== "/signup" &&
+//       !req.path.match(/^\/auth/) &&
+//       !req.path.match(/\./)) {
+//       req.session.returnTo = req.path;
+//     } else if (req.user &&
+//       req.path == "/account") {
+//       req.session.returnTo = req.path;
+//     }
+//     next();
+// });
 app.use('/config', express.static(path.join(process.cwd(), 'data', 'config.json')));
 app.use('/currencies', express.static(path.join(process.cwd(), 'data', 'currency.json')));
 
@@ -90,7 +90,6 @@ if(process.env.NODE_ENV === 'development'){
      * Can be used instead of react-hot-middleware if Redux is being used to manage app state
      */
     app.use(require('webpack-hot-middleware')(compiler));
-
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(process.cwd(), 'public', 'index.html'))
     })

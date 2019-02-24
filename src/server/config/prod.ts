@@ -1,2 +1,4 @@
-export const DB: string = process.env.DB;
-export const SESSION_SECRET: string = process.env.SESSION_SECRET;
+export default {
+    DB: process.env.DB,
+    SESSION_SECRET: process.env.SESSION_SECRET
+}

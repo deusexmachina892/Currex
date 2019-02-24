@@ -30,7 +30,7 @@ if(process.env.NODE_ENV === 'production'){
 }
 module.exports =  {
     mode: process.env.NODE_ENV,
-    devtool: 'source-map',
+    devtool: process.env.NODE_ENV === 'production'?'cheap-module-source-map':'source-map',
     entry: [
         'webpack-hot-middleware/client?reload=true',
             APP_DIR

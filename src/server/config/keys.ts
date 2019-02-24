@@ -1,7 +1,4 @@
-if(process.env.NODE_ENV === 'production'){
-   var { DB, SESSION_SECRET } = require('./prod');
-} else {
-    var { DB, SESSION_SECRET } = require('./dev');
-}
+import configDev from './dev';
+import configProd from './prod';
 
-export { DB, SESSION_SECRET };
+export default (process.env.NODE_ENV==='production'?configProd: configDev);
