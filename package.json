@@ -8,6 +8,8 @@
     "build-client:prod": "webpack -p",
     "start:prod": "npm run build-server:prod && node ./dist/server.js",
     "start:dev": "concurrently \"tsc -w -p tsconfig.app.json\" \"nodemon dist/server.js\"",
+    "start": "npm run start:prod",
+    "heroku:postbuild": "",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Rohan Dhar",
@@ -46,6 +48,8 @@
     "ts-loader": "^5.3.3",
     "typesafe-actions": "^3.1.0",
     "typescript": "^3.3.3",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3",
     "uglifyjs-webpack-plugin": "^2.1.1"
   },
   "devDependencies": {
@@ -68,9 +72,10 @@
     "html-webpack-plugin": "^3.2.0",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
-    "webpack": "^4.29.5",
-    "webpack-cli": "^3.2.3",
     "webpack-dev-middleware": "^3.5.2",
     "webpack-hot-middleware": "^2.24.3"
+  },
+  "engines":{
+    "node": "8.11.3"
   }
 }
