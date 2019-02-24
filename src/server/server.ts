@@ -7,7 +7,9 @@ import * as expressValidator from "express-validator";
 import * as session from 'express-session';
 import * as mongo from "connect-mongo";
 // import * as flash from 'connect-flash';
-import config from './config/keys';
+
+// need to import in Common JS
+const  config =  require('./config/keys');
 
 // register User Schema
 require('./models/User');
