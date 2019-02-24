@@ -9,7 +9,7 @@
     "start:prod": "node ./dist/server.js",
     "start:dev": "concurrently \"tsc -w -p tsconfig.app.json\" \"nodemon dist/server.js\"",
     "start": "npm run start:prod",
-    "heroku:postbuild": "npm run build-server:prod && npm run build-client:prod",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm run build-server:prod && npm run build-client:prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Rohan Dhar",
