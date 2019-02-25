@@ -200,18 +200,18 @@ class CustomModal extends React.PureComponent<any, any> {
              { this.renderContent() }
           </ModalBody>
           <ModalFooter>
-            <Button color='default' 
+            <button  className='btn-currex-secondary'
                     onClick={this.props.toggle}
                     >
                     Cancel
-                    </Button>
+                    </button>
                     {' '}
-            <Button  style={{background:'#FFEF03', 
-                     color:'#000', border:'none'}} 
+            <button  type='submit'
+                     className='btn-currex'
                      onClick={(e) => this.handleSubmit(e) }
                     >
                     {type}
-            </Button>
+            </button>
           </ModalFooter>
         </Modal>
       </div>

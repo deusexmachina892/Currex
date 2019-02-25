@@ -124,7 +124,7 @@ class Admin extends React.PureComponent<any, any>{
                             <FormGroup>
                                  <Row >
                                      <Col md='5'></Col>
-                                     <Col md='3'><Button style={{float: 'right', background:'#FFEF03', color:'#000', border:'none'}}>Update</Button></Col>
+                                     <Col md='3'><button type='submit' className='btn-currex'>Update</button></Col>
                                 </Row>
                             </FormGroup>
                             </Form>

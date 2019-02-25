@@ -168,17 +168,32 @@ h4 {
 .admin main {
     text-align: start;
 }
-.btn:focus{
-    outline: none;
-    background: #baae07;
+.btn-currex{
+    background: #FFEF03;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    float: right;
+    min-width: 50px;
 }
-.btn-secondary:focus{
+.btn-currex-secondary{
+    background: #fff;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    float: right;
+    min-width: 50px;
+}
+.btn-currex:hover, .btn-currex:active {
     outline: none;
-    background: #000
+    background: #eddc00;
+}
+.btn-currex-secondary:hover, .btn-currex-secondary:active {
+    outline: none;
+    background: #ddd;
 }
 button:focus{
     outline: none;
-    background: #ddd;
 }
 @keyframes loader {
     0% {
