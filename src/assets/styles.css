@@ -168,7 +168,14 @@ h4 {
 .admin main {
     text-align: start;
 }
-
+.btn:focus{
+    outline: none;
+    background: #baae07;
+}
+button:focus{
+    outline: none;
+    background: #baae07;
+}
 @keyframes loader {
     0% {
       -webkit-transform: translate(-50%, -50%) rotate(0deg);

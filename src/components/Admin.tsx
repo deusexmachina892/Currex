@@ -76,6 +76,9 @@ class Admin extends React.PureComponent<any, any>{
         })
     }
     render(){
+        if(this.props.config){
+            
+        }
         const { refresh_rate } = this.state;
         // console.log(this.props);
         return(
@@ -89,7 +92,7 @@ class Admin extends React.PureComponent<any, any>{
                         </Row>
                     </header>
                     <main>  
-                        
+                           <Row>Successfully Updated</Row>
                             <Form onSubmit={(e) => this.handleSubmit(e)}>
                             <FormGroup>
                                 <Row>

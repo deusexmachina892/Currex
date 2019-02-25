@@ -10,7 +10,7 @@ const INITIAL_STATE = {
     rate: { title: 'Exchange Rate', value: '0' }, 
     subtotal: { title: 'Subtotal', value: '0'}, 
     commission: { title: 'Commission', value: '0' },
-    totalBase: { title: 'Total', value: '0' },
+    totalBase: { title: 'Total', value: '0'},
     type: '',
     currency: '',
     currencyAmount: '',
@@ -45,21 +45,29 @@ class CustomModal extends React.PureComponent<any, any> {
         if (!isEmpty(this.props.currencies)){
             if(!this.props.currencies.loading){
                 if(prevProps.currencies.timestamp !== this.props.currencies.timestamp){
-                    if(this.props.currencies.errors){
-                           updateState['msg'] = {
-                                        data: this.props.currencies.errors,
-                                        color: '#FF0000'
-                           };
+                    // check whether amount entered is defined and amount is not equal to 0
+                    if(this.state.currencyAmount && this.state.currencyAmount !== 0){
+                        if(this.props.currencies.errors){
+                            updateState['msg'] = {
+                                         data: this.props.currencies.errors,
+                                         color: '#FF0000'
+                            };
+                     } else {
+                         updateState['msg'] = {
+                             data: 'Your transactions was successful!',
+                             color: '#006400'
+                         }
+                     }
                     } else {
                         updateState['msg'] = {
-                            data: 'Your transactions was successful!',
-                            color: '#006400'
+                            data: 'Plesde enter a valid non-zero amount!',
+                            color: '#000000'
                         }
                     }
-                }
-               
+                }   
             }
         }
+        
         if (!isEmpty(updateState)){
             this.setState({
                 ...this.state,
@@ -81,15 +89,15 @@ class CustomModal extends React.PureComponent<any, any> {
 
   calculateMeta(amount){
     if(!isEmpty(this.props.data)){
-        // check if amount is entered
-        if(amount){
+        // check if amount is entered and amount is non-zero
+        if(amount && Number(amount) !== 0 ){
             const { commissionPct, surcharge, minCommission, rate, type } = this.props.data;
         if( commissionPct && surcharge && minCommission && rate && type){
             let subtotal = Number(amount)/Number(rate); // rate is in terms of base currency, for ex 1 USD = 0.8 EUR; subtotal is always in base currency
             let commission = Math.max(((commissionPct+surcharge)/100 * subtotal), minCommission);
 
             // if buy, add commission to total payable base currency, else subtract from receivable base
-            let totalBase = type === 'Buy'? (subtotal + commission) : (subtotal - commission);
+            let totalBase = type === 'Buy'? (subtotal + commission) : ((subtotal - commission)>0?(subtotal - commission):0);
             this.setState({ 
                 subtotal: {
                     ...this.state.subtotal,
@@ -121,7 +129,8 @@ class CustomModal extends React.PureComponent<any, any> {
                 totalBase: {
                     ...this.state.totalBase,
                     value: 0
-                }
+                },
+                currencyAmount: 0
             }); 
         }
     } else {
@@ -148,13 +157,20 @@ class CustomModal extends React.PureComponent<any, any> {
     })
   }
   renderContent(){
+    const titleRegex = /Total/;
+    const { type } = this.state;
     return Object.values(pick(this.state, DISPLAY_CONFIG)).map( ({ title, value }) => {
         return(
             <React.Fragment key={title}>
                 {title === 'Total'? <hr /> : ''}
                 <section style={{display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-between', margin:'10px'}}>
                     <span>
-                        <b>{ title }</b>
+                        {/* Check for title and the check whether type is buy or sell to determine text */}
+                        <b>{ title==='Total'?
+                                type==='Buy'?
+                                'Total Payable'
+                                :'Total Receivable'
+                                :title }</b>
                     </span>
                     <span>
                         { title === 'Exchange Rate'?formatDigits(value, 4):formatDigits(value, 2) }
@@ -185,8 +201,18 @@ class CustomModal extends React.PureComponent<any, any> {
              { this.renderContent() }
           </ModalBody>
           <ModalFooter>
-            <Button color='default' onClick={this.props.toggle}>Cancel</Button>{' '}
-            <Button  style={{background:'#FFEF03', color:'#000', border:'none'}} onClick={(e) => this.handleSubmit(e) }>{type}</Button>
+            <Button color='default' 
+                    onClick={this.props.toggle}
+                    >
+                    Cancel
+                    </Button>
+                    {' '}
+            <Button  style={{background:'#FFEF03', 
+                     color:'#000', border:'none'}} 
+                     onClick={(e) => this.handleSubmit(e) }
+                    >
+                    {type}
+            </Button>
           </ModalFooter>
         </Modal>
       </div>
