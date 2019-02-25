@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Container } from 'reactstrap';
 
-export class Loader extends React.PureComponent{
+export class Loader extends React.PureComponent<any, any>{
     render(){
         return(
             <React.Fragment>

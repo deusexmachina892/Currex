@@ -3,7 +3,6 @@ const path = require('path');
 const htmlWebPackPlugin = require('html-webpack-plugin');
 const cleanWebPackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const APP_DIR  = path.resolve(__dirname, 'src', 'index.tsx');
 const BUILD_DIR = path.join(__dirname, 'dist', 'client');
@@ -17,9 +16,6 @@ let plugins = [
         template: path.resolve(__dirname, 'public', 'index.html')
     }),
     new cleanWebPackPlugin(BUILD_DIR),
-    // new ExtractTextPlugin({
-    //     filename: '[name].css'
-    //   })
    // new webpack.optimize.ModuleConcatenationPlugin(),
 ];
 
@@ -34,17 +30,17 @@ if(process.env.NODE_ENV === 'production'){
 }
 module.exports =  {
     mode: process.env.NODE_ENV,
-    devtool: process.env.NODE_ENV === 'production'?'cheap-module-source-map':'source-map',
-    entry: process.env.NODE_ENV ==='production'?
-            APP_DIR
-        :[
+    devtool: 'source-map',
+    entry: process.env.NODE_ENV === 'production'?
+        APP_DIR:
+        [
         'webpack-hot-middleware/client?reload=true',
             APP_DIR
         ],
     output: {
         path: BUILD_DIR,
         filename: process.env.NODE_ENV === 'production'?'[name].[contenthash].js':'[name].[hash].js',
-        chunkFilename: '[name].js',
+        chunkFilename: '[name].[contenthash].js',
         publicPath: '/'
     },
     resolve:{

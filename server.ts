@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as path from 'path';
+
 const app: express.Application = express();
 
 app.use('/config', express.static(path.join(process.cwd(), 'data', 'config.json')));
@@ -19,7 +20,7 @@ if(process.env.NODE_ENV === 'development'){
     app.use(history());
     app.use(require('webpack-dev-middleware')(compiler,{
         /**
-         * @noInfo Only display warnings and errors to the console
+         * @noInfo Only display warnings and errors to the concsole
          */
         noInfo: true,
         publicPath: '/',
@@ -39,18 +40,17 @@ if(process.env.NODE_ENV === 'development'){
      * Can be used instead of react-hot-middleware if Redux is being used to manage app state
      */
     app.use(require('webpack-hot-middleware')(compiler));
-    // app.get('*', (req, res) => {
-    //     res.sendFile(path.resolve(process.cwd(), 'public', 'index.html'))
-    // })
-} else {
-    app.use(express.static(path.join(process.cwd(), 'dist', 'assets')));
-    
+
     app.get('*', (req, res) => {
-        res.setHeader('Cache-Control', 'assets, max-age=604800');
+        res.sendFile(path.resolve(process.cwd(), 'public', 'index.html'))
+    })
+} else {
+    app.use(express.static(path.join(process.cwd(), 'dist', 'client')));
+    app.get('*', (req, res) => {
         res.sendFile(path.resolve(process.cwd(), 'dist', 'client', 'index.html'))
     })
 }
-  
+
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server bound to port: ${PORT}`);

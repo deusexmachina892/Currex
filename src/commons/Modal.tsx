@@ -24,6 +24,7 @@ class CustomModal extends React.PureComponent<any, any> {
     this.calculateMeta = this.calculateMeta.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  
   componentDidUpdate(prevProps, prevState){
       if(this.props.modal){
         const updateState = {};
@@ -80,7 +81,9 @@ class CustomModal extends React.PureComponent<any, any> {
 
   calculateMeta(amount){
     if(!isEmpty(this.props.data)){
-        const { commissionPct, surcharge, minCommission, rate, type } = this.props.data;
+        // check if amount is entered
+        if(amount){
+            const { commissionPct, surcharge, minCommission, rate, type } = this.props.data;
         if( commissionPct && surcharge && minCommission && rate && type){
             let subtotal = Number(amount)/Number(rate); // rate is in terms of base currency, for ex 1 USD = 0.8 EUR; subtotal is always in base currency
             let commission = Math.max(((commissionPct+surcharge)/100 * subtotal), minCommission);
@@ -101,7 +104,25 @@ class CustomModal extends React.PureComponent<any, any> {
                     value: parseFloat(totalBase.toString()).toFixed(2)
                 },
                 currencyAmount: amount
-            });
+            }); 
+        } 
+        
+        } else {
+            // if not entered --> set state to 0
+            this.setState({ 
+                subtotal: {
+                    ...this.state.subtotal,
+                    value: 0
+                },
+                commission:{
+                    ...this.state.commission,
+                    value: 0
+                },
+                totalBase: {
+                    ...this.state.totalBase,
+                    value: 0
+                }
+            }); 
         }
     } else {
         return;

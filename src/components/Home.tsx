@@ -32,13 +32,12 @@ class Home extends React.PureComponent<any, any>{
         }
         if(!isEqual(prevProps.exchangeRate.rates, this.props.exchangeRate.rates)){
             if(this.state.modal){
-                console.log(this.state.modalData)
                 this.setState({
                     modalData: {
                         ...this.state.modalData,
                         rate: formatDigits(this.state.modalData.type==='Buy'?
                                 this.props.exchangeRate.rates[this.state.modalData.currency].buy
-                                : this.props.exchangeRate.rates[this.state.modalData.currency].sell, 2)
+                                : this.props.exchangeRate.rates[this.state.modalData.currency].sell, 4)
                     }
                 })
             }
@@ -127,7 +126,7 @@ class Home extends React.PureComponent<any, any>{
                                     :<LoaderExchange />
                             }
                         </td>
-                        <td className={warningLevel?'warn':'ok'}>
+                        <td className={warningLevel?'warn':'okLevel'}>
                             {formatDigits(currencies[currency].stock, 2)}
                         </td>
                     </tr>
@@ -136,7 +135,7 @@ class Home extends React.PureComponent<any, any>{
         })   
     }
     render(){
-        const { config, currencies, exchangeRate, updateCurrencyStock } = this.props;
+        const { config, currencies, exchangeRate, updateCurrencyStock, removeCurrencyError } = this.props;
         const { displayLoaderMsg } = this.state;
         let warningLevelForBase = false;
         if (currencies && currencies.data && config && config.base){
@@ -188,6 +187,7 @@ class Home extends React.PureComponent<any, any>{
                     className='modal-dialog-centered'
                     currencies={this.props.currencies}
                     base={this.props.config.base}
+                    removeCurrencyError={removeCurrencyError}
                 />
             </React.Fragment>
         )

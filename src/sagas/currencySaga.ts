@@ -22,6 +22,7 @@ export function* loadCurrenciesSaga(){
         yield put({ type: LOAD_CURRENCIES_ERROR, payload: error})
     }
 }
+
 export function* updateCurrencyStockSaga(action){
     try {
         const { payload } = action;

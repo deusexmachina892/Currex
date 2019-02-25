@@ -59,7 +59,7 @@ class App extends React.Component<any, any>{
         }
     }
     render(){
-        const { config, currencies, exchangeRate, updateConfig, updateCurrencyStock } = this.props;
+        const { config, currencies, exchangeRate, updateConfig, updateCurrencyStock, removeCurrencyError } = this.props;
         return(
             <div className='currEx'>
                 <BrowserRouter>
@@ -72,6 +72,7 @@ class App extends React.Component<any, any>{
                                                 currencies={currencies}
                                                 exchangeRate={exchangeRate}
                                                 updateCurrencyStock={updateCurrencyStock}
+                                                removeCurrencyError={removeCurrencyError}
                                                 {...props}
                                             />)
                             }/>
@@ -102,7 +103,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     orchestrateGetExchangeRates: (payload) => dispatch(orchestrateGetExchangeRates(payload)),
     getExchangeRates: (payload) => dispatch(getExchangeRates(payload)),
     updateConfig: (payload) => dispatch(updateConfig(payload)),
-    updateCurrencyStock: (payload) => dispatch(updateCurrencyStock(payload))
+    updateCurrencyStock: (payload) => dispatch(updateCurrencyStock(payload)),
   })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

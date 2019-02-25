@@ -26,7 +26,7 @@
         ]   
     },
     "include": [
-        "server.ts",
+        "server.ts"
     ]                               
   }
   

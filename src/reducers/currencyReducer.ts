@@ -6,7 +6,7 @@ import {
     LOAD_CURRENCIES_ERROR,
     UPDATE_CURRENCY_STOCK_REQUEST, 
     UPDATE_CURRENCY_STOCK_SUCCESS, 
-    UPDATE_CURRENCY_STOCK_ERROR 
+    UPDATE_CURRENCY_STOCK_ERROR
 } from '../constants/actionTypes';
 
 // Type-safe initialState!
@@ -31,7 +31,7 @@ const reducer: Reducer = (state = initialState, action) => {
       return { ...state, loading: true }
 
     case UPDATE_CURRENCY_STOCK_SUCCESS: 
-      return { ...state, loading: false,  data: action.payload, timestamp: Date.now() }
+      return { ...state, loading: false,  data: action.payload, errors: undefined, timestamp: Date.now() }
     
     case UPDATE_CURRENCY_STOCK_ERROR: 
       return { ...state, loading: false, errors: action.payload, timestamp: Date.now() }
