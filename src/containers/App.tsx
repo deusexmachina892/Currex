@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as Loadable from 'react-loadable';
 import isEqual from 'lodash.isequal';
 import isEmpty from 'lodash.isempty';
+import { RouteComponentProps } from 'react-router-dom';
 
 // styles
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -21,6 +22,7 @@ import { any } from 'prop-types';
 
 
 
+// Lazily Loaded Components
 const HomeLazy =  Loadable({
     loader: () => import('../components/Home'),
     loading: Loader,
@@ -34,10 +36,38 @@ const Page404Lazy =   Loadable({
     loading: Loader,
 });
 
+// interfaces for Props and State Validation
+interface ConfigProps{
+    loading: boolean,
+    base: string,
+    margin: any,
+    commissionPct: any,
+    surcharge: any,
+    minCommission: any,
+    refresh_rate: any,
+    timestamp: TimeRanges,
+    error?: string,
+    success?:boolean
+};
+
+
+interface CurrencyProps{
+    loading: boolean,
+    data: {[x: string]: { [x: string]: any}},
+    error?: string
+};
+
+interface ExchangeRateProps{
+    rates: {[x: string]: { [x:string]: number, }},
+    loading: boolean,
+    timestamp: TimeRanges
+    error?: string,
+};
+
 interface AppProps {
-    config: object,
-    currencies: object,
-    exchangeRate: object,
+    config: ConfigProps,
+    currencies: CurrencyProps,
+    exchangeRate: ExchangeRateProps,
     loadConfig: typeof loadConfig,
     loadCurrencies: typeof loadCurrencies,
     orchestrateGetExchangeRates: typeof orchestrateGetExchangeRates,
@@ -51,11 +81,11 @@ interface AppState{
 
 }
 
-class App extends React.Component<any, AppState>{
+class App extends React.Component<AppProps, AppState>{
     constructor(props: any){
         super(props);
     }
-    componentDidMount(){
+    componentDidMount(): void{
         const { loadConfig, loadCurrencies } = this.props;
         loadCurrencies();
         loadConfig();
@@ -90,7 +120,7 @@ class App extends React.Component<any, AppState>{
                                             />)
                             }/>
                             <Route path='/admin' exact render={
-                                (props) => (<AdminLazy 
+                                (props: RouteComponentProps<any>) => (<AdminLazy 
                                                 config={config} 
                                                 updateConfig={updateConfig} 
                                                 {...props}

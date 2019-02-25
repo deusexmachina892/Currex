@@ -9,6 +9,8 @@ import CustomModal from '../commons/Modal';
 import { Loader, LoaderExchange } from '../commons/Loaders';
 import { updateCurrencyStock } from '../actions';
 
+
+// interfaces for Props and State Validation
 export interface ConfigProps{
     loading: boolean,
     base: string,
@@ -23,13 +25,13 @@ export interface ConfigProps{
 };
 
 
-export interface CurrencyProps{
+interface CurrencyProps{
     loading: boolean,
     data: {[x: string]: { [x: string]: any}},
     error?: string
 };
 
-export interface ExchangeRateProps{
+interface ExchangeRateProps{
     rates: {[x: string]: { [x:string]: number, }},
     loading: boolean,
     timestamp: TimeRanges
@@ -193,7 +195,7 @@ class Home extends React.PureComponent<HomeProps, HomeState>{
                   <header className="info">{
                       exchangeRate.timestamp &&
                       `Exchange Rates Shown as per ${' '}
-                      ${formatDate(exchangeRate.timestamp)}`
+                      ${formatDate((exchangeRate.timestamp).toString())}`
                     }. 
                   You have <span 
                                 className={warningLevelForBase?'warn':'okLevel'}

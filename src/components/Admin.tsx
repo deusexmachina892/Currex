@@ -6,6 +6,8 @@ import { Container, Row, Col, Form, FormGroup, InputGroup, InputGroupAddon, Inpu
 import { ConfigProps } from './Home';
 import { updateConfig } from '../actions';
 
+
+// interfaces for Props and State Validation
 interface AdminProps extends RouteComponentProps<any>{
     config: ConfigProps,
     updateConfig: typeof updateConfig

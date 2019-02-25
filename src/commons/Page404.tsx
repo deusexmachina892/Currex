@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Container } from 'reactstrap';
 class Page404 extends React.PureComponent<any, any>{
-    constructor(props){
+    constructor(props: any){
         super(props);
     }
     render(){

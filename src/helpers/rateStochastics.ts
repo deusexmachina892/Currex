@@ -1,5 +1,5 @@
 import mapValues from 'lodash.mapvalues';
-export const rateStochastics = (data) => {
+export const rateStochastics = (data:object):object => {
     if(typeof(data) === 'object') {
         const operation = Math.random() < 0.5? '+':'-';
         const factor = Math.random()*(0.02 - 0.01)*0.01;
