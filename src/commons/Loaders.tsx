@@ -13,7 +13,7 @@ export class Loader extends React.PureComponent<any, any>{
     }
 }
 
-export class LoaderExchange extends React.PureComponent{
+export class LoaderExchange extends React.PureComponent<any, any>{
     render(){
         return(
             <React.Fragment>

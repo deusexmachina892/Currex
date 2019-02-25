@@ -4,18 +4,8 @@ import isEmpty from 'lodash.isempty';
 import pick from 'lodash.pick';
 
 import { formatDigits } from '../helpers/formatDigits';
-import { DISPLAY_CONFIG } from '../constants/config';
+import { DISPLAY_CONFIG, INITIAL_STATE } from '../constants/config';
 
-const INITIAL_STATE = {
-    rate: { title: 'Exchange Rate', value: '0' }, 
-    subtotal: { title: 'Subtotal', value: '0'}, 
-    commission: { title: 'Commission', value: '0' },
-    totalBase: { title: 'Total', value: '0'},
-    type: '',
-    currency: '',
-    currencyAmount: '',
-    msg: {},
-}
 class CustomModal extends React.PureComponent<any, any> {
   constructor(props) {
     super(props);
@@ -25,7 +15,7 @@ class CustomModal extends React.PureComponent<any, any> {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   
-  componentDidUpdate(prevProps, prevState){
+  componentDidUpdate(prevProps, prevState): void{
       if(this.props.modal){
         const updateState = {};
         if( this.props.data){
@@ -46,7 +36,7 @@ class CustomModal extends React.PureComponent<any, any> {
             if(!this.props.currencies.loading){
                 if(prevProps.currencies.timestamp !== this.props.currencies.timestamp){
                     // check whether amount entered is defined and amount is not equal to 0
-                    if(this.state.currencyAmount && this.state.currencyAmount !== 0){
+                    if(this.state.currencyAmount && Number(this.state.currencyAmount) !== 0){
                         if(this.props.currencies.errors){
                             updateState['msg'] = {
                                          data: this.props.currencies.errors,
@@ -87,7 +77,7 @@ class CustomModal extends React.PureComponent<any, any> {
       }
   }
 
-  calculateMeta(amount){
+  calculateMeta(amount): void{
     if(!isEmpty(this.props.data)){
         // check if amount is entered and amount is non-zero
         if(amount && Number(amount) !== 0 ){
@@ -138,7 +128,7 @@ class CustomModal extends React.PureComponent<any, any> {
     }
 }
   
-  handleSubmit(e){
+  handleSubmit(e):void{
     e.preventDefault();
     const { 
         currency, 
@@ -180,7 +170,7 @@ class CustomModal extends React.PureComponent<any, any> {
         )
     })
   }
-  render() {
+  render(): JSX.Element {
       const { data: { currency, symbol, type }, base } = this.props;
       const { msg } = this.state;
     return (
@@ -193,7 +183,7 @@ class CustomModal extends React.PureComponent<any, any> {
               }</div>
           <InputGroup>
             <InputGroupAddon addonType="prepend">{symbol}</InputGroupAddon>
-            <Input placeholder="Amount" type="number" step="1" value={this.state.currentAmount} onChange={(e) => this.calculateMeta(e.target.value)}/>
+            <Input placeholder="Amount" type="number" step="1" value={this.state.currencyAmount} onChange={(e) => this.calculateMeta(e.target.value)}/>
             <InputGroupAddon addonType="append">.00</InputGroupAddon>
           </InputGroup>
           <b style={{margin:'10px'}}>(* All calculations below are in { base })</b>

@@ -3,6 +3,8 @@ const path = require('path');
 const htmlWebPackPlugin = require('html-webpack-plugin');
 const cleanWebPackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 const APP_DIR  = path.resolve(__dirname, 'src', 'index.tsx');
 const BUILD_DIR = path.join(__dirname, 'dist', 'client');
@@ -17,6 +19,7 @@ let plugins = [
     }),
     new cleanWebPackPlugin(BUILD_DIR),
    // new webpack.optimize.ModuleConcatenationPlugin(),
+   new BundleAnalyzerPlugin()
 ];
 
 if(process.env.NODE_ENV === 'production'){

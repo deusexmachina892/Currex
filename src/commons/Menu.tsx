@@ -1,8 +1,23 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps} from 'react-router-dom';
+import { NavMenuConfigProps } from '../constants/config';
 
-class Menu extends React.PureComponent<any, any> {
+interface MenuProps{
+    readonly mountPath: string,
+    readonly unMount: boolean,
+    readonly displayed: boolean,
+    readonly menuConfig: Array<NavMenuConfigProps>,
+    readonly unMountActionComplete: () => void,
+    readonly close: () => void,
+    readonly unMountAction: () => void,
+
+}
+interface MenuState{
+    cssClass: string
+}
+
+class Menu extends React.PureComponent<MenuProps, MenuState> {
     private homeRef = React.createRef<Link>();
     private adminRef = React.createRef<Link>();
     constructor(props){
@@ -40,7 +55,7 @@ class Menu extends React.PureComponent<any, any> {
                  }
                 }
             >
-                <div onClick={unMountAction} className='close-menu'><i className="fa fa-close fa-2x"></i></div>
+                <div onClick={() => unMountAction()} className='close-menu'><i className="fa fa-close fa-2x"></i></div>
                 <div className='logo' />
                 <div className='menu'>
                     {

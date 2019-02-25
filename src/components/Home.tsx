@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Table, Tooltip } from 'reactstrap';
-import * as moment from 'moment';
 import isEmpty from 'lodash.isempty';
 import isEqual from 'lodash.isequal';
 import { formatDigits } from '../helpers/formatDigits';
+import { formatDate } from '../helpers/formatDate';
 import CustomModal from '../commons/Modal';
 import { Loader, LoaderExchange } from '../commons/Loaders';
 
@@ -144,7 +144,11 @@ class Home extends React.PureComponent<any, any>{
         return(
             <React.Fragment>
                 <section className='home'>
-                  <header className="info">Exchange Rates Shown as per {moment(exchangeRate.timestamp).format('YYYY/MM/DD hh:mm:ss a')}. 
+                  <header className="info">{
+                      exchangeRate.timestamp &&
+                      `Exchange Rates Shown as per ${' '}
+                      ${formatDate(exchangeRate.timestamp)}`
+                    }. 
                   You have <span 
                                 className={warningLevelForBase?'warn':'okLevel'}
                             >
