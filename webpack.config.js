@@ -19,7 +19,7 @@ let plugins = [
     }),
     new cleanWebPackPlugin(BUILD_DIR),
    // new webpack.optimize.ModuleConcatenationPlugin(),
-   new BundleAnalyzerPlugin()
+   // new BundleAnalyzerPlugin()
 ];
 
 if(process.env.NODE_ENV === 'production'){
