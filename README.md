@@ -22,4 +22,4 @@ Build has been optimized to improve performance
 SSR
 
 ## Your Feedback?
-Eagerly waiting for your feedback on this about what improvements can be done
+Eagerly waiting for your feedback on this about what improvements can be made
