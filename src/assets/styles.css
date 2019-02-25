@@ -195,6 +195,15 @@ h4 {
 button:focus{
     outline: none;
 }
+input:hover, input:active, input:focus{
+    outline:0px !important;
+    -webkit-appearance:none;
+}
+.form-control:focus{
+    border-color: #787878;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
 @keyframes loader {
     0% {
       -webkit-transform: translate(-50%, -50%) rotate(0deg);
