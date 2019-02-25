@@ -120,7 +120,7 @@ class App extends React.Component<AppProps, AppState>{
                                             />)
                             }/>
                             <Route path='/admin' exact render={
-                                (props: RouteComponentProps<any>) => (<AdminLazy 
+                                (props) => (<AdminLazy 
                                                 config={config} 
                                                 updateConfig={updateConfig} 
                                                 {...props}

@@ -195,7 +195,7 @@ class Home extends React.PureComponent<HomeProps, HomeState>{
                   <header className="info">{
                       exchangeRate.timestamp &&
                       `Exchange Rates Shown as per ${' '}
-                      ${formatDate((exchangeRate.timestamp).toString())}`
+                      ${formatDate(exchangeRate.timestamp)}`
                     }. 
                   You have <span 
                                 className={warningLevelForBase?'warn':'okLevel'}
