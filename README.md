@@ -15,7 +15,7 @@ Loaders
 All the Routes are lazily loaded with react-loadable to improve performance
 
 ## Optimized Build
-Build has been optimized to improve performane
+Build has been optimized to improve performance
 
 
 ## What can be done from here
