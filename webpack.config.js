@@ -3,8 +3,9 @@ const path = require('path');
 const htmlWebPackPlugin = require('html-webpack-plugin');
 const cleanWebPackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const APP_DIR  = path.resolve(__dirname, 'src', 'client', 'index.tsx');
+const APP_DIR  = path.resolve(__dirname, 'src', 'index.tsx');
 const BUILD_DIR = path.join(__dirname, 'dist', 'client');
 
 let plugins = [
@@ -16,6 +17,9 @@ let plugins = [
         template: path.resolve(__dirname, 'public', 'index.html')
     }),
     new cleanWebPackPlugin(BUILD_DIR),
+    // new ExtractTextPlugin({
+    //     filename: '[name].css'
+    //   })
    // new webpack.optimize.ModuleConcatenationPlugin(),
 ];
 
