@@ -181,8 +181,7 @@ class CustomModal extends React.PureComponent<any, any> {
     })
   }
   render() {
-      const { data: { currency, symbol, type, commissionPct, surcharge, minCommission}, base, currencies, updateStock } = this.props;
-      const { error, loading } = currencies;
+      const { data: { currency, symbol, type }, base } = this.props;
       const { msg } = this.state;
     return (
       <div>

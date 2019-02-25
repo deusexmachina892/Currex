@@ -172,9 +172,13 @@ h4 {
     outline: none;
     background: #baae07;
 }
+.btn-secondary:focus{
+    outline: none;
+    background: #000
+}
 button:focus{
     outline: none;
-    background: #baae07;
+    background: #ddd;
 }
 @keyframes loader {
     0% {

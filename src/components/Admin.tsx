@@ -76,9 +76,10 @@ class Admin extends React.PureComponent<any, any>{
         })
     }
     render(){
-        if(this.props.config){
-            
+        if(this.props.config.success){
+            var { success } = this.props.config;
         }
+        const { loading } = this.props.config;
         const { refresh_rate } = this.state;
         // console.log(this.props);
         return(
@@ -92,7 +93,11 @@ class Admin extends React.PureComponent<any, any>{
                         </Row>
                     </header>
                     <main>  
-                           <Row>Successfully Updated</Row>
+                           <Row>{loading?'Please wait while information is being loaded'
+                                       : (typeof success !== 'undefined'?
+                                            (success? 'Successfully updated configuration'
+                                            : 'Something went wrong while updating. Please try again!')
+                                            :'') }</Row>
                             <Form onSubmit={(e) => this.handleSubmit(e)}>
                             <FormGroup>
                                 <Row>
