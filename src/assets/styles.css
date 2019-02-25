@@ -168,6 +168,24 @@ h4 {
 .admin main {
     text-align: start;
 }
+.admin .msg-container{
+    min-height: 50px;
+}
+.admin .msg-container .msg{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    color: #787878;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.admin .msg-container .msg .cancel{
+    color: #000000;
+}
+.admin .msg .cancel:hover, .admin .msg .cancel:active{
+    color: #FF0000;
+    cursor: pointer;
+}
 .btn-currex{
     background: #FFEF03;
     padding: 8px;

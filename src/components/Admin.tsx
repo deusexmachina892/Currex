@@ -11,7 +11,8 @@ class Admin extends React.PureComponent<any, any>{
             commissionPct: this.props.config.commissionPct ||'',
             surcharge: this.props.config.surcharge ||'',
             minCommission: this.props.config.minCommission ||'',
-            margin: this.props.config.margin || ''
+            margin: this.props.config.margin || '',
+            showMessage: false
         }
         this.renderFormFields = this.renderFormFields.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -45,6 +46,9 @@ class Admin extends React.PureComponent<any, any>{
         e.preventDefault();
         const { updateConfig } = this.props;
         updateConfig(this.state);
+        this.setState({
+            showMessage: true
+        })
     }
     renderFormFields(){
         return ADMIN_CONFIG.map(({ label, name}) => {
@@ -80,7 +84,7 @@ class Admin extends React.PureComponent<any, any>{
             var { success } = this.props.config;
         }
         const { loading } = this.props.config;
-        const { refresh_rate } = this.state;
+        const { refresh_rate, showMessage } = this.state;
         // console.log(this.props);
         return(
             <React.Fragment>
@@ -93,11 +97,19 @@ class Admin extends React.PureComponent<any, any>{
                         </Row>
                     </header>
                     <main>  
-                           <Row>{loading?'Please wait while information is being loaded'
+                           <Row className='msg-container'>{showMessage&& 
+                                <span className='msg'>
+                                {(loading?'Please wait while information is being loaded'
                                        : (typeof success !== 'undefined'?
                                             (success? 'Successfully updated configuration'
                                             : 'Something went wrong while updating. Please try again!')
-                                            :'') }</Row>
+                                            :''))
+                                            }
+                                {showMessage && <span className='cancel' onClick={() => this.setState({
+                                                showMessage: false
+                                            })}> &nbsp; &nbsp;&nbsp;x </span>} 
+                                </span>}
+                                            </Row>
                             <Form onSubmit={(e) => this.handleSubmit(e)}>
                             <FormGroup>
                                 <Row>
