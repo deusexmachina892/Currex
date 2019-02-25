@@ -1,20 +1,66 @@
 import * as React from 'react';
 import { Table, Tooltip } from 'reactstrap';
+import { RouteComponentProps } from 'react-router-dom';
 import isEmpty from 'lodash.isempty';
 import isEqual from 'lodash.isequal';
 import { formatDigits } from '../helpers/formatDigits';
 import { formatDate } from '../helpers/formatDate';
 import CustomModal from '../commons/Modal';
 import { Loader, LoaderExchange } from '../commons/Loaders';
+import { updateCurrencyStock } from '../actions';
 
-class Home extends React.PureComponent<any, any>{
+export interface ConfigProps{
+    loading: boolean,
+    base: string,
+    margin: any,
+    commissionPct: any,
+    surcharge: any,
+    minCommission: any,
+    refresh_rate: any,
+    timestamp: TimeRanges,
+    error?: string,
+    success?:boolean
+};
+
+
+export interface CurrencyProps{
+    loading: boolean,
+    data: {[x: string]: { [x: string]: any}},
+    error?: string
+};
+
+export interface ExchangeRateProps{
+    rates: {[x: string]: { [x:string]: number, }},
+    loading: boolean,
+    timestamp: TimeRanges
+    error?: string,
+};
+
+interface HomeProps extends RouteComponentProps<any>{
+    config: ConfigProps,
+    exchangeRate: ExchangeRateProps,
+    currencies: CurrencyProps,
+    updateCurrencyStock: typeof updateCurrencyStock
+};
+
+interface HomeState{
+    modal: boolean,
+    tooltipBuyOpen: boolean,
+    tooltipSellOpen: boolean,
+    displayLoaderMsg: boolean,
+    modalData: any,
+    modalConfigData: any
+}
+
+class Home extends React.PureComponent<HomeProps, HomeState>{
     constructor(props){
         super(props);
         this.state = {
             modal: false,
             modalData: {},
             modalConfigData: {},
-            tooltipOpen: false,
+            tooltipBuyOpen: false,
+            tooltipSellOpen: false,
             displayLoaderMsg: false
           };
         
@@ -135,7 +181,7 @@ class Home extends React.PureComponent<any, any>{
         })   
     }
     render(){
-        const { config, currencies, exchangeRate, updateCurrencyStock, removeCurrencyError } = this.props;
+        const { config, currencies, exchangeRate, updateCurrencyStock } = this.props;
         const { displayLoaderMsg } = this.state;
         let warningLevelForBase = false;
         if (currencies && currencies.data && config && config.base){
@@ -191,7 +237,6 @@ class Home extends React.PureComponent<any, any>{
                     className='modal-dialog-centered'
                     currencies={this.props.currencies}
                     base={this.props.config.base}
-                    removeCurrencyError={removeCurrencyError}
                 />
             </React.Fragment>
         )

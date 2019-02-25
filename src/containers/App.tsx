@@ -37,11 +37,21 @@ const Page404Lazy =   Loadable({
 interface AppProps {
     config: object,
     currencies: object,
-    exchangeRate: object
+    exchangeRate: object,
+    loadConfig: typeof loadConfig,
+    loadCurrencies: typeof loadCurrencies,
+    orchestrateGetExchangeRates: typeof orchestrateGetExchangeRates,
+    getExchangeRates: typeof getExchangeRates,
+    updateConfig: typeof updateConfig,
+    updateCurrencyStock: typeof updateCurrencyStock,
 
 }
 
-class App extends React.Component<any, any>{
+interface AppState{
+
+}
+
+class App extends React.Component<any, AppState>{
     constructor(props: any){
         super(props);
     }
@@ -63,7 +73,7 @@ class App extends React.Component<any, any>{
         }
     }
     render(){
-        const { config, currencies, exchangeRate, updateConfig, updateCurrencyStock, removeCurrencyError } = this.props;
+        const { config, currencies, exchangeRate, updateConfig, updateCurrencyStock } = this.props;
         return(
             <div className='currEx'>
                 <BrowserRouter>
@@ -76,7 +86,6 @@ class App extends React.Component<any, any>{
                                                 currencies={currencies}
                                                 exchangeRate={exchangeRate}
                                                 updateCurrencyStock={updateCurrencyStock}
-                                                removeCurrencyError={removeCurrencyError}
                                                 {...props}
                                             />)
                             }/>
