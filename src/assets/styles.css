@@ -374,7 +374,7 @@ input:hover, input:active, input:focus{
     .nav .tabs-small .nav-small-menu{
         position: fixed;
         /* display: block; */
-        background: #fff;
+        background-image: linear-gradient(180deg, #fff, #fffbce);
         border-left: 1px solid #ddd;
         box-shadow: 2px 2px #ddd;
         height: 100vh;
@@ -401,8 +401,9 @@ input:hover, input:active, input:focus{
     .nav .tabs-small .nav-small-menu .close-menu{
         display: flex;
         justify-content: flex-end;
-        margin: 10px 10px;
-        color: #787878;
+        padding: 10px 10px;
+        color: #000000;
+
     }
     .nav .tabs-small .nav-small-menu .logo{
         display: block;
@@ -424,14 +425,14 @@ input:hover, input:active, input:focus{
     }
     .nav .tabs-small .nav-small-menu .menu div a{
         text-decoration: none;
-        color: #ddd;
+        color: #777777;
         font-weight: 600;
         font-size: 1.25em;
     }
     .nav .tabs-small .nav-small-menu div a:hover, 
     .nav .tabs-small .nav-small-menu div a:active,
     .nav .tabs-small .nav-small-menu div a:focus {
-        color: #787878;
+        color: #000000;
         outline: none;
     }
     .nav footer{
