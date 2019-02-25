@@ -29,6 +29,10 @@ const AdminLazy =   Loadable({
     loader: () => import('../components/Admin'),
     loading: Loader,
 });
+const Page404Lazy =   Loadable({
+    loader: () => import('../commons/Page404'),
+    loading: Loader,
+});
 
 interface AppProps {
     config: object,
@@ -83,6 +87,11 @@ class App extends React.Component<any, any>{
                                                 {...props}
                                             />)
                             }/>
+                            <Route  path='*' exact render={
+                                (props) => (<Page404Lazy 
+                                            {...props}
+                                />)
+                                } />
                         </Switch>
                     </div>
                 </BrowserRouter>

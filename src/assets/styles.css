@@ -186,6 +186,9 @@ h4 {
     color: #FF0000;
     cursor: pointer;
 }
+.page404{
+    text-align: center;
+}
 .btn-currex{
     background: #FFEF03;
     padding: 8px;
