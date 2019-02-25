@@ -140,11 +140,14 @@ class App extends React.Component<AppProps, AppState>{
 }
 
 
+// state to props
 const mapStateToProps = ({ config, currencies, exchangeRate }) => ({
    config,
    currencies,
    exchangeRate
-})
+});
+
+// actions dispatched
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     loadConfig: () => dispatch(loadConfig()),
     loadCurrencies: () => dispatch(loadCurrencies()),
@@ -152,6 +155,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     getExchangeRates: (payload) => dispatch(getExchangeRates(payload)),
     updateConfig: (payload) => dispatch(updateConfig(payload)),
     updateCurrencyStock: (payload) => dispatch(updateCurrencyStock(payload)),
-  })
+  });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
