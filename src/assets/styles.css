@@ -83,35 +83,85 @@ h4 {
     margin: 0 10px;
 
 }
-.nav .tabs a{  
-    text-decoration: none;
-    color: #000000;
-    padding: 5px 10px;
-    background-image: linear-gradient(#000000, #000000);
-    background-repeat: no-repeat;
-    transition: background-size .5s, color .5s;
-    background-size: 100% 0%;
-    background-position: 0% 0%;
-}
 
-.nav .tabs a:hover, .nav .tabs a:active{
-    cursor: pointer;
-    color: #fff;
-    border-radius: 3px;
-    background-size: 100% 100%;
-}
 
-.nav .tabs a:focus{
+.nav .tabs a{
+    color: black; /* button text color */
     outline: none;
-    font-weight: 600;
-    border-bottom: 2px solid #000;
-    border-spacing:10px;
-}
-
-.nav:after{
+    background: transparent;
+    border: none;
+    border-bottom: 4px solid #000000;
+    letter-spacing: 0.0625em;
+    padding: 2px 6px; 
+    font: bold 8px; /* use google font */
+    line-height: 2;
+    position: relative;
+    display: inline-block;
+    margin-right: 3px;
+    cursor: pointer;
+    text-decoration: none; /* remove underline if using A instead of BUTTON tag */
+    overflow: hidden;
+    transition: all .5s;
+    border-radius: 5px;
+    min-width: 50px;
+  }
+  
+  /* //// Default effect: Slide from Top  //// */
+  
+  .nav .tabs a:before,
+  .nav .tabs a:after{
     content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    background: #000000; /* onhover background color */
+    z-index: -1;
+    transform: translate3D(0,-100%,0); /* move elements above button so they don't appear initially */
+    transition: all .5s;
+  }
+  
+  .nav .tabs a:before{
+    background: #FFEF03; /* button default background color */
+    z-index: -2;
+    transform: translate3D(0,0,0);
+  }
+  
+  .nav .tabs a:hover{
+      color: white;
+  }
+  
+  .nav .tabs a:hover:after{
+    transform: translate3D(0,0,0);
+    transition: all .5s;
+  }
 
-}
+
+.nav .tabs .nav-spl-effect{
+    border-bottom: 2px solid #000000;
+  }
+  
+  .nav .tabs .nav-spl-effect:before,
+  .nav .tabs .nav-spl-effect:after{
+    background: #000000;
+    transform: translate3D(0,-100%,0);
+  }
+  
+  .nav .tabs .nav-spl-effect:after{
+    transform: translate3D(0,100%,0);
+  }
+  
+  .nav .tabs .nav-spl-effect:hover:before,
+  .nav .tabs .nav-spl-effect:hover:after{
+    transform: translate3D(0,-50%,0);
+    transition: all .5s;
+  }
+  
+  .nav .tabs .nav-spl-effect:hover:after{
+    transform: translate3D(0,50%,0);
+  }
 
 .home{
     text-align: center;

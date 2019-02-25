@@ -55,7 +55,7 @@ class Header extends React.PureComponent<HeaderProps, HeaderState>{
         return NAV_MENU_CONFIG.map(({ item, link }) => {
             return(
                 <li key={item}>
-                    <Link to={link} ref={item === 'Home'?this.homeRef: this.adminRef}>{item}</Link>
+                    <Link className='nav-spl-effect' to={link} ref={item === 'Home'?this.homeRef: this.adminRef}>{item}</Link>
                 </li>
             )
         })
