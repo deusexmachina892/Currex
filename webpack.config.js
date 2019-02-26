@@ -87,7 +87,7 @@ if(process.env.NODE_ENV === 'production'){
               stage: 3,
             }),
           ],
-          sourceMap: process.env.NODE_ENV === 'production' ? false : true,
+          sourceMap: process.env.NODE_ENV === 'production' ? true : true,
         },
       },
     ].filter(Boolean);
@@ -95,7 +95,7 @@ if(process.env.NODE_ENV === 'production'){
       loaders.push({
         loader: require.resolve(preProcessor),
         options: {
-          sourceMap: process.env.NODE_ENV === 'production' ? false : true,
+          sourceMap: process.env.NODE_ENV === 'production' ? true : true,
         },
       });
     }
@@ -133,7 +133,7 @@ module.exports =  {
                 exclude: /\.module\.css$/,
                 use: getStyleLoaders({
                   importLoaders: 1,
-                  sourceMap: process.env.NODE_ENV==='production'?false:true,
+                  sourceMap: process.env.NODE_ENV==='production'?true:true,
                 }),
                 // Don't consider CSS imports dead code even if the
                 // containing package claims to have no side effects.
@@ -203,7 +203,7 @@ module.exports =  {
           parallel: true,
           // Enable file caching
           cache: true,
-          sourceMap: false,
+          sourceMap: true,
         }),
         // This is only used in production mode
         new OptimizeCSSAssetsPlugin({
