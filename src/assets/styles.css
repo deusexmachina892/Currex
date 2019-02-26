@@ -353,6 +353,9 @@ input:hover, input:active, input:focus{
   
 
 @media only screen and (max-width: 622px) {
+    .nav header{
+        left: 0;
+    }
     .nav .tabs {
         display: none;
     }
@@ -361,6 +364,7 @@ input:hover, input:active, input:focus{
         justify-content: flex-end;
         color: #000000;
         margin-bottom: 30px; 
+        right: 0;
     }
 
     .nav .tabs-small .ham{
@@ -466,7 +470,7 @@ input:hover, input:active, input:focus{
         margin-top:-20px;   
         }
     .home, .admin {
-        margin-top: 50px;
+        margin-top: 20px;
     }
 } 
 
