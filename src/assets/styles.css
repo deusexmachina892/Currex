@@ -3,6 +3,7 @@
 body{
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;
+    text-align: center;
 }
 
 hr {
@@ -30,12 +31,6 @@ h4 {
     /* margin: -30px -20px 0 -20px; */
     overflow: hidden;
     /* z-index: 9999; */
-    top:0;
-    left:0;
-    right:0;
-    position: fixed;
-    width: 100vw;
-
 }
 .nav main {
     display: grid;
@@ -171,7 +166,6 @@ h4 {
 
 .home{
     text-align: center;
-    margin-top: 300px!important;
 }
 
 .home .warn{
@@ -405,7 +399,7 @@ input:hover, input:active, input:focus{
         100% { -webkit-transform: translateX(0);   }
     }
     
-    @-webkit-keyframes closeMenu {
+    @keyframes closeMenu {
         0% { transform: translateX(0); }
         100% { transform: translateX(100%);}
     }
@@ -471,6 +465,9 @@ input:hover, input:active, input:focus{
     .nav footer{
         margin-top:-20px;   
         }
+    .home, .admin {
+        margin-top: 50px;
+    }
 } 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
