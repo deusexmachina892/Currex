@@ -379,6 +379,7 @@ input:hover, input:active, input:focus{
 
     .nav .tabs-small .ham{
       margin: 30px;
+      fill: #787878;
     }
 
     .nav .tabs-small:hover, .nav .tabs-small:active{

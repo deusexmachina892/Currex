@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
-import SideNav from 'react-simple-sidenav';
+import SideNav, { MenuIcon } from 'react-simple-sidenav';
 
 import { NAV_MENU_CONFIG } from '../constants/config';
 
@@ -11,8 +11,7 @@ interface HeaderProps extends RouteComponentProps<any>{
 }
 
 interface HeaderState {
-    displayMenu: boolean,
-    unmountMenu: boolean
+    displayMenu: boolean
 }
 
 class Header extends React.PureComponent<HeaderProps, HeaderState>{
@@ -21,12 +20,9 @@ class Header extends React.PureComponent<HeaderProps, HeaderState>{
     constructor(props){
         super(props);
         this.state = {
-            displayMenu: false,
-            unmountMenu: false
+            displayMenu: false
         }
         this.handleToggleMenu = this.handleToggleMenu.bind(this);
-        this.unmountMenuAction = this.unmountMenuAction.bind(this);
-        this.unMountMenuActionComplete = this.unMountMenuActionComplete.bind(this);
     }
     componentDidMount():void{
         const node = this.props.location.pathname === '/'? this.homeRef.current:this.adminRef.current;
@@ -39,17 +35,6 @@ class Header extends React.PureComponent<HeaderProps, HeaderState>{
         const { displayMenu } = this.state;
         this.setState({
             displayMenu: !displayMenu
-        })
-    }
-
-    unmountMenuAction():void{
-        this.setState({
-            unmountMenu: true
-        })
-    }
-    unMountMenuActionComplete():void{
-        this.setState({
-            unmountMenu: false
         })
     }
     renderContent(){
@@ -74,18 +59,18 @@ class Header extends React.PureComponent<HeaderProps, HeaderState>{
                     </ul>
                     </section>
                     <section className="tabs-small">
-                        <i className="fa fa-bars fa-2x ham" onClick={() => this.handleToggleMenu()}></i>
-                               
-                               {
-                                   displayMenu &&
-                                   <SideNav 
-                                   
-                                        title="Simple Sidenav"
-                                        items={['Item 1', 'Item 2']}
-                                        openFromRight={true}
-                                        showNav={displayMenu}
-                                   />
-                               }             
+                        {/* <i className="fa fa-bars fa-2x ham" onClick={() => this.handleToggleMenu()}></i> */}
+                            <MenuIcon  className='ham' onClick={() => this.handleToggleMenu()} />
+                            <SideNav 
+                                title=''
+                                titleStyle={{fontSize: '1rem', background: '#fff'}}
+                                navStyle={{width: '40vw'}}
+                                items={[<MenuIcon />, 'Item 2']}
+                                onHideNav={()=>this.handleToggleMenu()}
+                                openFromRight={true}
+                                showNav={displayMenu}
+                            />
+                            
                     </section>
 
                 </main>
