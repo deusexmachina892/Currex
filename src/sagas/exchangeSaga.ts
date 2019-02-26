@@ -10,18 +10,21 @@ import { GET_EXCHANGE_RATE_SUCCESS, GET_EXCHANGE_RATE_ERROR, UPDATE_CONFIG_SUCCE
 
 export function* orchestrateGetExchangeRateSaga(action){
     try{
-        const timer = setInterval(() => {
-           const { base, currencies, getExchangeRates, margin } = action.payload;
-           getExchangeRates({ base, currencies, margin });
-        }, action.payload.refresh_rate);
+        if(action.payload.refresh_rate > 0){
+            var timer = setInterval(() => {
+               var { base, currencies, margin, getExchangeRates, updateRateInfo } = action.payload;
+                getExchangeRates({ base, currencies, margin });
+             }, action.payload.refresh_rate);
+       }
 
         const timerUpdate = yield takeLatest(UPDATE_CONFIG_SUCCESS, (actionFromUpdateConfig)=>{
-            if(actionFromUpdateConfig['payload'].refresh_rate){
+            // timer disabled if refresh rate is 0
+            if(actionFromUpdateConfig['payload'].refresh_rate || Number(actionFromUpdateConfig['payload'].refresh_rate) === 0){
                 clearInterval(timer);
             }
         })
     } catch (error){
-        yield put({ type: GET_EXCHANGE_RATE_ERROR, payload: error.message})
+        yield put({ type: GET_EXCHANGE_RATE_ERROR, payload: error.message});
     }
 }
 
@@ -29,11 +32,9 @@ export function* getExchangeRateSaga(action){
     try {
        const { margin } = action.payload;
        const exchangeRates = yield call(getExchangeRatesFromApi, action.payload);
-      yield put({ type: GET_EXCHANGE_RATE_SUCCESS, payload: { rates: exchangeRates, margin } })
+      yield put({ type: GET_EXCHANGE_RATE_SUCCESS, payload: { rates: exchangeRates, margin } });
     } catch(error){
-        yield[
-            put({ type: GET_EXCHANGE_RATE_ERROR, payload: error.message})
-        ]
+        yield put({ type: GET_EXCHANGE_RATE_ERROR, payload: error.message});  
     }
 }
 

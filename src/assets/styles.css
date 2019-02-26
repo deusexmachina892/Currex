@@ -204,7 +204,7 @@ h4 {
   outline: none;
 }
 .admin{
-    text-align: start;
+    text-align: center;
     margin: 40px 15%;
 }
 
@@ -219,15 +219,25 @@ h4 {
     text-align: start;
 }
 .admin .msg-container{
-    min-height: 50px;
+    min-height: 70px;
 }
 .admin .msg-container .msg{
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    color: #787878;
-    border: 1px solid #ddd;
     border-radius: 5px;
+}
+.admin .info{
+    color: #787878;
+    border: 1px solid #787878;
+}
+.admin .msg-container .success{
+    color: green;
+    border: 1px solid green;
+}
+.admin .warn{
+    color: red;
+    border: 1px solid red;
 }
 .admin .msg-container .msg .cancel{
     color: #000000;

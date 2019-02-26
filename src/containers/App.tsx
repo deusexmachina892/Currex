@@ -46,7 +46,7 @@ interface ConfigProps{
     minCommission: any,
     refresh_rate: any,
     timestamp: TimeRanges,
-    error?: string,
+    errors?: string,
     success?:boolean
 };
 
@@ -54,14 +54,14 @@ interface ConfigProps{
 interface CurrencyProps{
     loading: boolean,
     data: {[x: string]: { [x: string]: any}},
-    error?: string
+    errors?: string
 };
 
 interface ExchangeRateProps{
     rates: {[x: string]: { [x:string]: number, }},
     loading: boolean,
     timestamp: TimeRanges
-    error?: string,
+    errors?: string,
 };
 
 interface AppProps {
@@ -74,7 +74,6 @@ interface AppProps {
     getExchangeRates: typeof getExchangeRates,
     updateConfig: typeof updateConfig,
     updateCurrencyStock: typeof updateCurrencyStock,
-
 }
 
 interface AppState{
@@ -159,7 +158,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     orchestrateGetExchangeRates: (payload) => dispatch(orchestrateGetExchangeRates(payload)),
     getExchangeRates: (payload) => dispatch(getExchangeRates(payload)),
     updateConfig: (payload) => dispatch(updateConfig(payload)),
-    updateCurrencyStock: (payload) => dispatch(updateCurrencyStock(payload)),
+    updateCurrencyStock: (payload) => dispatch(updateCurrencyStock(payload))
   });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

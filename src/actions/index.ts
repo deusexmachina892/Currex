@@ -5,7 +5,8 @@ import {
     ORCHESTRATE_GET_EXCHANGE_RATE_REQUEST,
     GET_EXCHANGE_RATE_REQUEST, 
     UPDATE_CONFIG_REQUEST, 
-    UPDATE_CURRENCY_STOCK_REQUEST
+    UPDATE_CURRENCY_STOCK_REQUEST,
+    EXCHANGE_RATE_UPDATE_INFO
    } from '../constants/actionTypes';
 
 export const orchestrateGetExchangeRates = (payload) => {

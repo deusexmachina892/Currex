@@ -11,6 +11,7 @@ export const ORCHESTRATE_GET_EXCHANGE_RATE_ERROR:string = '@@exchange/ORCHESTRAT
 export const GET_EXCHANGE_RATE_REQUEST:string = '@@exchange/GET_EXCHANGE_RATE_REQUEST';
 export const GET_EXCHANGE_RATE_SUCCESS:string = '@@exchange/GET_EXCHANGE_RATE_SUCCESS';
 export const GET_EXCHANGE_RATE_ERROR:string = '@@exchange/GET_EXCHANGE_RATE_ERROR';
+export const EXCHANGE_RATE_UPDATE_INFO:string = '@@exchange/EXCHANGE_RATE_UPDATE_INFO';
 export const LOAD_CURRENCIES_REQUEST:string = '@@currency/LOAD_CURRENCIES_REQUEST';
 export const LOAD_CURRENCIES_SUCCESS:string = '@@currency/LOAD_CURRENCIES_SUCCESS';
 export const LOAD_CURRENCIES_ERROR:string = '@@currency/LOAD_CURRENCIES_ERROR';

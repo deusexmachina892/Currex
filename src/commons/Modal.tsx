@@ -35,8 +35,8 @@ class CustomModal extends React.PureComponent<any, any> {
         if (!isEmpty(this.props.currencies)){
             if(!this.props.currencies.loading){
                 if(prevProps.currencies.timestamp !== this.props.currencies.timestamp){
-                    // check whether amount entered is defined and amount is not equal to 0
-                    if(this.state.currencyAmount && Number(this.state.currencyAmount) !== 0){
+                    // check whether amount entered is defined and amount is not equal to 0 or less than 0
+                    if(this.state.currencyAmount && Number(this.state.currencyAmount) > 0){
                         if(this.props.currencies.errors){
                             updateState['msg'] = {
                                          data: this.props.currencies.errors,
@@ -79,8 +79,8 @@ class CustomModal extends React.PureComponent<any, any> {
 
   calculateMeta(amount): void{
     if(!isEmpty(this.props.data)){
-        // check if amount is entered and amount is non-zero
-        if(amount && Number(amount) !== 0 ){
+        // check if amount is entered and amount is positive
+        if(amount && Number(amount) > 0 ){
             const { commissionPct, surcharge, minCommission, rate, type } = this.props.data;
         if( commissionPct && surcharge && minCommission && rate && type){
             let subtotal = Number(amount)/Number(rate); // rate is in terms of base currency, for ex 1 USD = 0.8 EUR; subtotal is always in base currency

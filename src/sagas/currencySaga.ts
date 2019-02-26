@@ -57,7 +57,7 @@ export function* updateCurrencyStockSaga(action){
        yield put({ type: UPDATE_CURRENCY_STOCK_SUCCESS, payload: currencies });
       
     } catch(error){
-        yield put({ type: UPDATE_CURRENCY_STOCK_ERROR, payload: error.message})
+        yield put({ type: UPDATE_CURRENCY_STOCK_ERROR, payload: error.message});
     }
 }
 

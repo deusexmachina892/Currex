@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Table, Tooltip } from 'reactstrap';
+import { Table, Tooltip, Row } from 'reactstrap';
 import { RouteComponentProps } from 'react-router-dom';
 import isEmpty from 'lodash.isempty';
 import isEqual from 'lodash.isequal';
@@ -20,7 +20,7 @@ export interface ConfigProps{
     minCommission: any,
     refresh_rate: any,
     timestamp: TimeRanges,
-    error?: string,
+    errors?: string,
     success?:boolean
 };
 
@@ -28,14 +28,14 @@ export interface ConfigProps{
 interface CurrencyProps{
     loading: boolean,
     data: {[x: string]: { [x: string]: any}},
-    error?: string
+    errors?: string
 };
 
 interface ExchangeRateProps{
     rates: {[x: string]: { [x:string]: number, }},
     loading: boolean,
     timestamp: TimeRanges
-    error?: string,
+    errors?: string,
 };
 
 interface HomeProps extends RouteComponentProps<any>{

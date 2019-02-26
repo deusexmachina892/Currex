@@ -32,10 +32,10 @@ const reducer: Reducer = (state = initialState, action) => {
       return { ...state, loading: true }
     
     case UPDATE_CONFIG_SUCCESS: 
-      return { ...state, loading: false, ...action.payload, success: true, timestamp: Date.now() }
+      return { ...state, loading: false, ...action.payload, success: true, errors: undefined, timestamp: Date.now() }
     
     case UPDATE_CONFIG_ERROR:
-      return { ...state, loading: false, errors: action.payload, timestamp: Date.now() }
+      return { ...state, loading: false, errors: action.payload, success: false, timestamp: Date.now() }
     
     default: 
       return state

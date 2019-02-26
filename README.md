@@ -3,8 +3,8 @@
 Currex - An Airport Currency Exchange Service
 
 ## Validations
-Implemented Validations for empty and 0 values on the Home Page Modal
-Implemented Validations for empty and 0 values on the Admin Page
+Implemented Validations for empty, negatives, and 0 values on the Home Page Modal
+Implemented Validations for empty, negatives, and 0 values on the Admin Page
 
 ## Extra Features Added
 Messages on success

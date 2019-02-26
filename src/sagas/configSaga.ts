@@ -25,15 +25,33 @@ export function* loadConfigSaga(){
 export function* updateConfigSaga(action){
     try {
      const { payload } = action;
-      let config = pick(payload, Object.keys(payload).filter(item => typeof(payload[item]) === 'string')
-      );
+      let config = pick(payload, Object.keys(payload).filter(item => 
+            {
+                // only update changes made by user
+                if(typeof(payload[item]) === 'string'){
+                    if ( Number(payload[item]) > 0){
+                        return item;
+                    } else if (payload[item] !== '' && Number(payload[item]) === 0){
+                        if(item === 'refresh_rate'){
+                            return item;
+                        }
+                    } else {
+                        // all non positive values and blank values are thrown as error
+                        throw Error('Error: Please enter valid positive values only');
+                    }
+                } 
+            } 
+        )
+       );
+      if(Object.keys(config).length === 0 ) {
+          // no updates
+          throw Error('Error: Nothing to update. Please make the required changes first!');
+      }
       config = mapValues(config, (value) => Number(value));
-      yield put({ type: UPDATE_CONFIG_SUCCESS, payload: config })
+      yield put({ type: UPDATE_CONFIG_SUCCESS, payload: config });
       
     } catch(error){
-        yield[
-            put({ type: UPDATE_CONFIG_ERROR, payload: error})
-        ]
+        yield put({ type: UPDATE_CONFIG_ERROR, payload: error.message});
     }
 }
 

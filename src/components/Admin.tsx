@@ -65,7 +65,8 @@ class Admin extends React.PureComponent<AdminProps, AdminState>{
     handleSubmit(e): void{
         e.preventDefault();
         const { updateConfig } = this.props;
-        updateConfig(this.state);
+        const { showMessage, ...restState } = this.state; // removing showMessage state from being evaluated for update
+        updateConfig(restState);
         this.setState({
             showMessage: true
         })
@@ -104,9 +105,11 @@ class Admin extends React.PureComponent<AdminProps, AdminState>{
         if(this.props.config.success){
             var { success } = this.props.config;
         }
+        if (this.props.config.errors){
+            var { errors } = this.props.config;
+        }
         const { loading } = this.props.config;
         const { refresh_rate, showMessage } = this.state;
-        // console.log(this.props);
         return(
             <React.Fragment>
                 <section className='admin'>
@@ -117,14 +120,22 @@ class Admin extends React.PureComponent<AdminProps, AdminState>{
                             <h4>Settings</h4>
                         </Row>
                     </header>
-                    <main>  
+                    <main> 
+                        {/* A sweet info about rate update */}
+                            <Row>  
+                                <b>**{
+                                Number(this.props.config.refresh_rate) > 0?
+                                `Exchange Rates updated every ${this.props.config.refresh_rate} sec`
+                                : 'Exchange Rate update has been disabled. Please set refresh rate in the settings section to start getting updates!'
+                                }
+                                </b>
+                            </Row>
                            <Row className='msg-container'>{showMessage&& 
-                                <span className='msg'>
-                                {(loading?'Please wait while information is being loaded'
-                                       : (typeof success !== 'undefined'?
-                                            (success? 'Successfully updated configuration'
-                                            : 'Something went wrong while updating. Please try again!')
-                                            :''))
+                                <span className={`msg ${errors?'warn': success?'success': 'info'}`}>
+                                {loading?'Processing: Please wait while information is being loaded'
+                                       : success? 'Success: Successfully updated configuration'
+                                            : errors? errors
+                                                :'Error: Something went wrong while updating. Please try again!'
                                             }
                                 {showMessage && <span className='cancel' onClick={() => this.setState({
                                                 showMessage: false
