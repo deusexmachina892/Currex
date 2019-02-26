@@ -92,15 +92,20 @@ class App extends React.Component<AppProps, AppState>{
     }
     componentDidUpdate(prevProps, prevState){
         if (!this.props.config.loading && !isEqual(prevProps.config, this.props.config)){
-           const { config, currencies, exchangeRate, orchestrateGetExchangeRates, getExchangeRates  } = this.props;
+           const { config, currencies, exchangeRate, orchestrateGetExchangeRates,  getExchangeRates } = this.props;
            const { base, refresh_rate, margin } = config;
-
-           // action for first Api call to reduce initial load time
-           getExchangeRates({ base, currencies: currencies.data, margin })
-
            // orchestration action with timer for api calls
            orchestrateGetExchangeRates( { base, currencies: currencies.data, margin, refresh_rate, getExchangeRates } );
         }
+
+        // initial action call to for perfomance --> first call
+       if (!this.props.config.loading 
+                && (prevProps.config.loading || prevProps.currencies.loading)
+                && (!prevProps.currencies.data || !prevProps.config.base && !prevProps.config.margin)
+                ){
+            const { config: { base, margin }, currencies: { data }, getExchangeRates } = this.props;
+            getExchangeRates({ base, currencies: data, margin })
+       }
     }
     render(){
         const { config, currencies, exchangeRate, updateConfig, updateCurrencyStock } = this.props;

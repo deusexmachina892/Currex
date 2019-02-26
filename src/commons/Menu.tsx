@@ -45,7 +45,6 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
     render(){
         const { menuConfig, close, unMountAction, unMountActionComplete, displayed } = this.props;
         const { cssClass } = this.state;
-       // const notVisible = d
         return(
             <div className={`nav-small-menu ${cssClass}` } style={{display: (displayed?'block':'none')}}
                  onAnimationEnd={event => {
