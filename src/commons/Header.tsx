@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
+import SideNav from 'react-simple-sidenav';
 
 import { NAV_MENU_CONFIG } from '../constants/config';
 
@@ -77,17 +78,16 @@ class Header extends React.PureComponent<HeaderProps, HeaderState>{
                                
                                {
                                    displayMenu &&
-                                   <Menu 
-                                     menuConfig={NAV_MENU_CONFIG} 
-                                    close={this.handleToggleMenu} 
-                                    displayed={this.state.displayMenu} 
-                                    unMount={this.state.unmountMenu}
-                                    unMountAction={this.unmountMenuAction}
-                                    unMountActionComplete={this.unMountMenuActionComplete}
-                                    mountPath={this.props.location.pathname}
-                                />
+                                   <SideNav 
+                                   
+                                        title="Simple Sidenav"
+                                        items={['Item 1', 'Item 2']}
+                                        openFromRight={true}
+                                        showNav={displayMenu}
+                                   />
                                }             
                     </section>
+
                 </main>
                 <footer></footer>
                

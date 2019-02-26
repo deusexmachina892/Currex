@@ -105,7 +105,8 @@ class App extends React.Component<AppProps, AppState>{
                  const { config: { base, margin }, currencies, getExchangeRates } = this.props;
                  if (!isEmpty(currencies)){
                      const { data } = currencies;
-                 }
+                     getExchangeRates({ base, currencies: data, margin })
+                 }     
        }
     }
     render(){
