@@ -19,7 +19,7 @@ import { Loader } from '../commons/Loaders';
 import Header from '../commons/Header';
 import Home from '../components/Home';
 import { any } from 'prop-types';
-
+import { ConfigProps, CurrencyProps, ExchangeRateProps } from '../interfaces';
 
 
 // Lazily Loaded Components
@@ -37,33 +37,6 @@ const Page404Lazy =   Loadable({
 });
 
 // interfaces for Props and State Validation
-interface ConfigProps{
-    loading: boolean,
-    base: string,
-    margin: any,
-    commissionPct: any,
-    surcharge: any,
-    minCommission: any,
-    refresh_rate: any,
-    timestamp: TimeRanges,
-    errors?: string,
-    success?:boolean
-};
-
-
-interface CurrencyProps{
-    loading: boolean,
-    data: {[x: string]: { [x: string]: any}},
-    errors?: string
-};
-
-interface ExchangeRateProps{
-    rates: {[x: string]: { [x:string]: number, }},
-    loading: boolean,
-    timestamp: TimeRanges
-    errors?: string,
-};
-
 interface AppProps {
     config: ConfigProps,
     currencies: CurrencyProps,

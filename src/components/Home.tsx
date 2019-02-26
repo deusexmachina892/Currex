@@ -8,36 +8,10 @@ import { formatDate } from '../helpers/formatDate';
 import CustomModal from '../commons/Modal';
 import { Loader, LoaderExchange } from '../commons/Loaders';
 import { updateCurrencyStock } from '../actions';
+import { ConfigProps, CurrencyProps, ExchangeRateProps } from '../interfaces';
 
 
 // interfaces for Props and State Validation
-export interface ConfigProps{
-    loading: boolean,
-    base: string,
-    margin: any,
-    commissionPct: any,
-    surcharge: any,
-    minCommission: any,
-    refresh_rate: any,
-    timestamp: TimeRanges,
-    errors?: string,
-    success?:boolean
-};
-
-
-interface CurrencyProps{
-    loading: boolean,
-    data: {[x: string]: { [x: string]: any}},
-    errors?: string
-};
-
-interface ExchangeRateProps{
-    rates: {[x: string]: { [x:string]: number, }},
-    loading: boolean,
-    timestamp: TimeRanges
-    errors?: string,
-};
-
 interface HomeProps extends RouteComponentProps<any>{
     config: ConfigProps,
     exchangeRate: ExchangeRateProps,

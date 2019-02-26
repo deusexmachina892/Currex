@@ -7,9 +7,13 @@ Implemented Validations for empty, negatives, and 0 values on the Home Page Moda
 Implemented Validations for empty, negatives, and 0 values on the Admin Page
 
 ## Extra Features Added
-Messages on success
+Messages on success / failure / error
+Update Rate Message
+Other Meaningful messages
 Optimized Interfaces for Buy/Sell
 Loaders
+Side Navigation for smaller screens
+Tooltips
 
 ## Lazy Loading of Components
 All the Routes are lazily loaded with react-loadable to improve performance
@@ -18,8 +22,10 @@ All the Routes are lazily loaded with react-loadable to improve performance
 Build has been optimized to improve performance
 
 
-## What can be done from here
+## What I could have done with more time
 SSR
+Slightly better design patterns maybe?
+Better Type checking
 
 ## Information
 Please refresh the page some time if the API does not load. Since, it is a free api, the performance is not really awesome. Additionally,

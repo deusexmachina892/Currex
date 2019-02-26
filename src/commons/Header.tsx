@@ -59,7 +59,6 @@ class Header extends React.PureComponent<HeaderProps, HeaderState>{
                     </ul>
                     </section>
                     <section className="tabs-small">
-                        {/* <i className="fa fa-bars fa-2x ham" onClick={() => this.handleToggleMenu()}></i> */}
                             <MenuIcon  className='ham' onClick={() => this.handleToggleMenu()} />
                             <SideNav 
                                  title={<div className='logo' />}

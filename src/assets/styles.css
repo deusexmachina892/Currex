@@ -166,6 +166,7 @@ h4 {
 
 .home{
     text-align: center;
+    justify-content: center;
 }
 
 .home .warn{

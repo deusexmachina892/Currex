@@ -1,6 +1,4 @@
 import * as express from 'express';
-// tslint:disable-next-line
-import * as expressStaticGzip from "express-static-gzip";
 import * as path from 'path';
 
 const app: express.Application = express();
@@ -47,11 +45,13 @@ if(process.env.NODE_ENV === 'development'){
         res.sendFile(path.resolve(process.cwd(), 'public', 'index.html'))
     })
 } else {
-    app.use('/dist/client', expressStaticGzip('dist/client', {
+    app.use(express.static(path.join(process.cwd(), 'dist', 'client')));
+
+    const expressStaticGzip = require('express-static-gzip');
+    app.use('/dist/client', expressStaticGzip('/dist/client', {
         enableBrotli: true,
         orderPreference: ['br', 'gz'],
      }));
-    app.use(express.static(path.join(process.cwd(), 'dist', 'client')));
     app.get('*', (req, res) => {
         res.setHeader("Cache-Control", "public, max-age=31536000");
         res.sendFile(path.resolve(process.cwd(), 'dist', 'client', 'index.html'))

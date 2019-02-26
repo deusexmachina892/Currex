@@ -4,7 +4,7 @@ import isEmpty from 'lodash.isempty';
 import { RouteComponentProps } from 'react-router-dom';
 import { ADMIN_CONFIG } from '../constants/config';
 import { Container, Row, Col, Form, FormGroup, InputGroup, InputGroupAddon, Input , Label, Button } from 'reactstrap';
-import { ConfigProps } from './Home';
+import { ConfigProps } from '../interfaces';
 import { updateConfig } from '../actions';
 
 
