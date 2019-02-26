@@ -23,7 +23,7 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
     constructor(props){
         super(props);
         this.state = {
-            cssClass: 'nav-small-menu-open'
+            cssClass: 'nav-small-menu-open',
         }
     }
     componentDidMount(){
@@ -43,10 +43,11 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
     }
 
     render(){
-        const { menuConfig, close, unMountAction, unMountActionComplete } = this.props;
+        const { menuConfig, close, unMountAction, unMountActionComplete, displayed } = this.props;
         const { cssClass } = this.state;
+       // const notVisible = d
         return(
-            <div className={`nav-small-menu ${cssClass}`}
+            <div className={`nav-small-menu ${cssClass}` } style={{display: (displayed?'block':'none')}}
                  onAnimationEnd={event => {
                     if(event.animationName === "closeMenu"){
                         close();
