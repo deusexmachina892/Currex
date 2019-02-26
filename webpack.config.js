@@ -7,6 +7,8 @@ const safePostCssParser = require('postcss-safe-parser');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CompressionPlugin = require('compression-webpack-plugin');
+const BrotliPlugin = require('brotli-webpack-plugin');
 
 
 const APP_DIR  = path.resolve(__dirname, 'src', 'index.tsx');
@@ -21,7 +23,7 @@ let plugins = [
     new cleanWebPackPlugin(BUILD_DIR),
    
    // new webpack.optimize.ModuleConcatenationPlugin(),
-   // new BundleAnalyzerPlugin()
+  
 ];
 
 if(process.env.NODE_ENV === 'production'){
@@ -32,11 +34,25 @@ if(process.env.NODE_ENV === 'production'){
             // both options are optional
             filename: 'static/css/[name].[contenthash:8].css',
             chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
-          })
+          }),
+          new CompressionPlugin({
+            filename: '[path].gz[query]',
+            algorithm: 'gzip',
+            test: /\.js$|\.css$|\.html$/,
+            threshold: 10240,
+            minRatio: 0.7
+            }),
+            new BrotliPlugin({
+            asset: '[path].br[query]',
+            test: /\.js$|\.css$|\.html$/,
+            threshold: 10240,
+            minRatio: 0.7
+            })
     )
 } else {
     plugins.push(
         new webpack.HotModuleReplacementPlugin(),
+        new BundleAnalyzerPlugin()
     )
 }
 
