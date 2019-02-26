@@ -1,5 +1,6 @@
 import * as React from 'react';
 import isEqual from 'lodash.isequal';
+import isEmpty from 'lodash.isempty';
 import { RouteComponentProps } from 'react-router-dom';
 import { ADMIN_CONFIG } from '../constants/config';
 import { Container, Row, Col, Form, FormGroup, InputGroup, InputGroupAddon, Input , Label, Button } from 'reactstrap';
@@ -39,7 +40,6 @@ class Admin extends React.PureComponent<AdminProps, AdminState>{
     }
 
 
-    // work on this
     componentDidUpdate(prevProps, prevState): void{
         if( this.props.config){
             const configArray = [ 
@@ -55,11 +55,13 @@ class Admin extends React.PureComponent<AdminProps, AdminState>{
                     updateState[config] = this.props.config[config]
                 }
             });
-
-            this.setState({
-                ...this.state,
-                ...updateState
-            });
+    // make sure updateState is not empty
+    if(!isEmpty(updateState)){
+                this.setState({
+                    ...this.state,
+                    ...updateState
+                });
+            }
         }
     }
     handleSubmit(e): void{
