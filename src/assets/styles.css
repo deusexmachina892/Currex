@@ -407,9 +407,6 @@ input:hover, input:active, input:focus{
         height: 50px;
        margin-top: -20px;
     }
-    .home {
-        margin: 0 5%;
-    }
 }
 
 
@@ -417,6 +414,9 @@ input:hover, input:active, input:focus{
     .table {
         width: 80%;
     }
+    .nav header{
+        margin-bottom: 30px;   
+        }
 }
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {

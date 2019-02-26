@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Table, Tooltip, Row } from 'reactstrap';
+import { Table, Tooltip } from 'reactstrap';
 import { RouteComponentProps } from 'react-router-dom';
 import isEmpty from 'lodash.isempty';
 import isEqual from 'lodash.isequal';
