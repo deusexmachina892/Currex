@@ -381,85 +381,28 @@ input:hover, input:active, input:focus{
       margin: 30px;
       fill: #787878;
     }
-
-    .nav .tabs-small:hover, .nav .tabs-small:active{
-        cursor: pointer;    
-    }
-
-    .nav .tabs-small .nav-small-menu{
-        position: fixed;
-        /* display: block; */
-        background-image: linear-gradient(180deg, #fff, #fffbce);
-        border-left: 1px solid #ddd;
-        box-shadow: 2px 2px #ddd;
-        height: 100vh;
-        width: 40vw;
-        z-index: 9999!important;
-    }
-
-    .nav-small-menu-open {
-        animation: openMenu 0.4s ease-out forwards;
-    }
-    .nav-small-menu-closed {
-        animation: closeMenu 0.4s ease-out forwards;
-    }
-
-    @keyframes openMenu {
-        0% { transform: translateX(100%); }
-        100% { transform: translateX(0);   }
-    }
-
-    @-webkit-keyframes openMenu {
-        0% { -webkit-transform: translateX(100%); }
-        100% { -webkit-transform: translateX(0);   }
-    }
-    
-    @keyframes closeMenu {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(100%);}
-    }
-    
-    @-webkit-keyframes closeMenu {
-        0% { -webkit-transform: translateX(0); }
-        100% { -webkit-transform: translateX(100%);}
-    }
-    .nav .tabs-small .nav-small-menu .close-menu{
-        display: flex;
-        justify-content: flex-end;
-        padding: 10px 10px;
-        color: #000000;
-
-    }
-    .nav .tabs-small .nav-small-menu .logo{
+    .nav .tabs-small .logo{
         display: block;
         background: url('../assets/logo.png') no-repeat!important;
         background-size: contain !important;
         background-position: center center !important;
+        background-image: linear-gradient(180deg, #FFEF03, #fff);
         min-width: 100px;
         min-height: 100px;
-        margin: 10px auto;
-        padding: 20px;
+        padding: 40px;
         border-top: 1px solid #ddd;
         border-bottom: 1px solid #ddd;
     }
-
-    .nav .tabs-small .nav-small-menu .menu div{
-        border-bottom: 1px solid #ddd;
-        padding: 20px;
-        text-align: center;
+    .nav .tabs-small ul{
+        margin: 0 !important;
+        padding: 0 !important;
     }
-    .nav .tabs-small .nav-small-menu .menu div a{
+    .nav .tabs-small ul li a{
+        color: #787878;
         text-decoration: none;
-        color: #777777;
-        font-weight: 600;
-        font-size: 1.25em;
+        text-transform: uppercase;
     }
-    .nav .tabs-small .nav-small-menu div a:hover, 
-    .nav .tabs-small .nav-small-menu div a:active,
-    .nav .tabs-small .nav-small-menu div a:focus {
-        color: #000000;
-        outline: none;
-    }
+    
     .nav footer{
         height: 50px;
        margin-top: -20px;

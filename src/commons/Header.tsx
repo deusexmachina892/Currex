@@ -62,10 +62,23 @@ class Header extends React.PureComponent<HeaderProps, HeaderState>{
                         {/* <i className="fa fa-bars fa-2x ham" onClick={() => this.handleToggleMenu()}></i> */}
                             <MenuIcon  className='ham' onClick={() => this.handleToggleMenu()} />
                             <SideNav 
-                                title=''
-                                titleStyle={{fontSize: '1rem', background: '#fff'}}
-                                navStyle={{width: '40vw'}}
-                                items={[<MenuIcon />, 'Item 2']}
+                                 title={<div className='logo' />}
+                                titleStyle={{fontSize: '1rem', background: '#fff', padding: '0'}}
+                                navStyle={{width: '60vw'}}
+                                itemStyle={{listStyleType: 'none', borderBottom: ' 1 px solid #ddd', color: '#C0C0C0'}}
+                                itemHoverStyle={{background: '#FFFACD', color: '#787878'}}
+                                items={[...NAV_MENU_CONFIG.map( ({ item, link }) => {
+                                    return(
+                                        <Link to={link}>
+                                            {item}
+                                        </Link>
+                                    )
+                                }),
+                                <div onClick={() => this.handleToggleMenu() }>
+                                    Close Menu
+                                </div>
+                            ]
+                            }
                                 onHideNav={()=>this.handleToggleMenu()}
                                 openFromRight={true}
                                 showNav={displayMenu}
