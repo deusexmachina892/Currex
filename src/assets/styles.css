@@ -427,6 +427,11 @@ input:hover, input:active, input:focus{
     .home, .admin {
         margin-top: 20px;
     }
+
+    .home main .loader-msg{
+        height: 50px;
+        color: #787878;
+    }
 } 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */

@@ -71,16 +71,13 @@ class App extends React.Component<AppProps, AppState>{
         }
 
         // initial action call to for perfomance --> first call
-       if (!this.props.config.loading 
-                && (prevProps.config.loading)
-                && (!prevProps.config.base && !prevProps.config.margin)
-                ){
-                 const { config: { base, margin }, currencies, getExchangeRates } = this.props;
-                 if (!isEmpty(currencies)){
-                     const { data } = currencies;
-                     getExchangeRates({ base, currencies: data, margin })
-                 }     
-       }
+        if(!isEmpty(this.props.currencies.data) && this.props.config.base && this.props.config.margin){
+            if(isEmpty(prevProps.currencies.data) || (!prevProps.config.base && !prevProps.config.margin)){
+                const { config: { base, margin }, currencies, getExchangeRates } = this.props;
+                const { data } = currencies;
+                getExchangeRates({ base, currencies: data, margin })
+            }
+        }
     }
     render(){
         const { config, currencies, exchangeRate, updateConfig, updateCurrencyStock } = this.props;
