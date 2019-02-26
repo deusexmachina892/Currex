@@ -30,6 +30,12 @@ h4 {
     /* margin: -30px -20px 0 -20px; */
     overflow: hidden;
     /* z-index: 9999; */
+    top:0;
+    left:0;
+    right:0;
+    position: fixed;
+    width: 100vw;
+
 }
 .nav main {
     display: grid;
@@ -165,7 +171,7 @@ h4 {
 
 .home{
     text-align: center;
-    margin: 0 15%;
+    margin-top: 300px!important;
 }
 
 .home .warn{
