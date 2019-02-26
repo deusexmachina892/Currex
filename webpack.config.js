@@ -36,7 +36,7 @@ if(process.env.NODE_ENV === 'production'){
             chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
           }),
           new CompressionPlugin({
-            file: '[path].gz[query]',
+            filename: '[path].gz[query]',
             algorithm: 'gzip',
             test: /\.js$|\.css$|\.html$/,
             threshold: 10240,
