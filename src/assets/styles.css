@@ -432,7 +432,9 @@ input:hover, input:active, input:focus{
     .home, .admin {
         margin-top: 20px;
     }
-
+    .home {
+        margin: 0 2%;
+    }
     .home main .loader-msg{
         height: 50px;
         color: #787878;
@@ -444,6 +446,9 @@ input:hover, input:active, input:focus{
     .nav footer{
         margin-top:-70px;   
         }
+    .home {
+        margin: 0 5%;
+    }
 } 
 
 /* Medium devices (landscape tablets, 768px and up) */
