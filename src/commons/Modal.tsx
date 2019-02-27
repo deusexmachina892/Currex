@@ -80,7 +80,7 @@ class CustomModal extends React.PureComponent<any, any> {
   calculateMeta(amount): void{
     if(!isEmpty(this.props.data)){
         // check if amount is entered and amount is positive
-        if(amount && Number(amount) > 0 ){
+        if(amount && Number(amount) >0 ){
             const { commissionPct, surcharge, minCommission, rate, type } = this.props.data;
         if( commissionPct && surcharge && minCommission && rate && type){
             let subtotal = Number(amount)/Number(rate); // rate is in terms of base currency, for ex 1 USD = 0.8 EUR; subtotal is always in base currency
@@ -120,7 +120,7 @@ class CustomModal extends React.PureComponent<any, any> {
                     ...this.state.totalBase,
                     value: 0
                 },
-                currencyAmount: 0
+                currencyAmount: ''
             }); 
         }
     } else {

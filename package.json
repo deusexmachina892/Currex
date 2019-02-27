@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-server:prod": "tsc server.ts --outDir dist",
-    "build-client:prod": "webpack -p",
-    "start:prod": "npm run build-server:prod && node ./dist/server.js",
-    "start:dev": "concurrently \"tsc -w -p tsconfig.app.json\" \"nodemon dist/server.js\"",
+    "build-server:prod": " cross-env NODE_ENV=production && tsc server.ts --outDir dist",
+    "build-client:prod": "cross-env NODE_ENV=production && webpack -p",
+    "start:prod": "cross-env NODE_ENV=production && npm run build-server:prod && node ./dist/server.js",
+    "start:dev": "cross-env NODE_ENV=development && concurrently \"tsc -w -p tsconfig.app.json\" \"nodemon dist/server.js\"",
     "start": "npm run start:prod",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm run build-server:prod && npm run build-client:prod",
     "test": "echo \"Error: no test specified\" && exit 1"
