@@ -2,6 +2,10 @@
 
 Currex - An Airport Currency Exchange Service  
 
+## Live Demo:
+https://currex-deus.herokuapp.com/
+Note: The app is hosted on a free heroku server, which goes to sleep. So, there might be some latency because of the nature of a free heorku server.
+
 ## Validations
 Implemented Validations for empty, negatives, and 0 values on the Home Page Modal  
 Implemented Validations for empty, negatives, and 0 values on the Admin Page  
